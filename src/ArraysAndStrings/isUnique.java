@@ -22,7 +22,9 @@ public class isUnique {
     //Option 2:
     //Use hashset (which is a hashmap with pairs "Key - new Object()") + cycle - O(n) cuz set.add is O(1)
 
-
+    //Without using additional datastructures:
+    //Sort string by ASCII and use binary search - O(nlogn)
+    //If string is unmodifiable then we will have to do stupid O(n^2) comparisons of each character
      static boolean isUnique (String phrase) {
         HashSet<Character> checkSet = new HashSet<Character>();
         char[] charactersArray = phrase.toCharArray();
