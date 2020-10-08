@@ -1,5 +1,7 @@
 package ArraysAndStrings;
 
+import java.util.HashMap;
+
 public class CheckPermutation {
     //Implement an algorithm to decide if one string is a permutation of the other
 
@@ -20,30 +22,47 @@ public class CheckPermutation {
     //int of occurrences in the first string, second - occurrences
     //in the second string. And then we will just need to iterate over hashmap
     //iteration complexity will be >= 128 or 256
-    // approx. O(n)
+    //complexity O(n)
 
     //Option 3
-    // Create matrix n*2: int[][] strCompArr = new int[str.toCharArray.length][1];
-    // Iterate both strings O(n) complexity
-    // strCompArr[str1Arr[i]][0] += 1;
-    // strCompArr[str2Arr[i]][1] += 1;
-    // Iterate over strCompArr and check strCompArr[i][0] == strCompArr[i][1] - n
-    // complexity O(n)
+    //Create matrix n*2: int[][] strCompArr = new int[str.toCharArray.length][1];
+    //Iterate both strings O(n) complexity
+    //strCompArr[str1Arr[i]][0] += 1;
+    //strCompArr[str2Arr[i]][1] += 1;
+    //Iterate over strCompArr and check strCompArr[i][0] == strCompArr[i][1] - n
+    //complexity O(n)
 
+    //Hashmap looks unnecessary here cuz why we simply don't need hashing here
 
-    public static void main(String[] args){
-        String str = "hello world";
-        String str2 = "olleh world";
-        char[][] strCompArr = new char[str.toCharArray().length][1];
+    public static boolean chkPermutation(String str, String str2) {
+        char[] str1Arr = str.toCharArray();
+        char[] str2Arr = str2.toCharArray();
+        if(str1Arr.length != str2Arr.length){
+            return false;
+        }
+        int[][] strCompArr = new int[128][2];
         for(int i = 0; i < strCompArr.length; i++){
             strCompArr[i][0] = 0; strCompArr[i][1] = 0;
         }
-        char[] str1Arr = str.toCharArray();
-        char[] str2Arr = str2.toCharArray();
         for(int i = 0; i < str1Arr.length; i++){
             strCompArr[str1Arr[i]][0] += 1;
             strCompArr[str2Arr[i]][1] += 1;
         }
+        for(int i = 0; i < str1Arr.length; i++){
+            System.out.println("Str1 index " + (int)str1Arr[i] + " encountered " + strCompArr[str1Arr[i]][0] + " times");
+            System.out.println("Str2 index " + (int)str1Arr[i] + " encountered " + strCompArr[str1Arr[i]][1] + " times");
+            System.out.println(strCompArr[str1Arr[i]][0] + "==" + strCompArr[str2Arr[i]][1]);
+            if (strCompArr[str1Arr[i]][0] != strCompArr[str1Arr[i]][1]) {
+                return false;
+            }
+        }
+        return true;
+    }
 
+    public static void main(String[] args){
+        System.out.println(chkPermutation("hello world", "olleh world"));
+        System.out.println(chkPermutation("hei amigos", "let's go over there"));
+        System.out.println(chkPermutation("aaaaa", "a"));
+        System.out.println(chkPermutation("bbbbb", "bbbbb"));
     }
 }
