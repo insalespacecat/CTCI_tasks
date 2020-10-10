@@ -25,6 +25,7 @@ public class IsUnique {
     //Without using additional datastructures:
     //Sort string by ASCII and use binary search - O(nlogn)
     //If string is unmodifiable then we will have to do stupid O(n^2) comparisons of each character
+
      static boolean isUnique (String phrase) {
         HashSet<Character> checkSet = new HashSet<Character>();
         char[] charactersArray = phrase.toCharArray();
