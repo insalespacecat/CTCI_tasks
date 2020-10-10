@@ -17,7 +17,7 @@ public class PalindromePermutation {
     //We have the following letters: 2*d 2*a 4*m 2*i 1*t
     //it is a palindrome cuz we have 1 anchor - t, all others can be divided by 2
 
-    public static boolean palindromePermut(String phrase){
+    public static boolean palindromePermutation(String phrase){
         char[] phraseCharacters = phrase.toCharArray();
         int[] ASCIISymbolsPresented = new int[128];
         boolean middleAnchor = false;
@@ -43,11 +43,11 @@ public class PalindromePermutation {
     }
 
     public static void main(String[] args){
-        System.out.println(palindromePermut("ddaammmmiit"));
-        System.out.println(palindromePermut("dda ammmmi it"));
-        System.out.println(palindromePermut("taco cat"));
-        System.out.println(palindromePermut("taco cat taco cat"));
-        System.out.println(palindromePermut("No my friend!"));
-        System.out.println(palindromePermut("No my friend!!dneirf ym oN"));
+        System.out.println(palindromePermutation("ddaammmmiit"));
+        System.out.println(palindromePermutation("dda ammmmi it"));
+        System.out.println(palindromePermutation("taco cat"));
+        System.out.println(palindromePermutation("taco cat taco cat"));
+        System.out.println(palindromePermutation("No my friend!"));
+        System.out.println(palindromePermutation("No my friend!!dneirf ym oN"));
     }
 }

@@ -1,7 +1,5 @@
 package ArraysAndStrings;
 
-import java.util.HashMap;
-
 public class CheckPermutation {
     //Implement an algorithm to decide if one string is a permutation of the other
 
@@ -34,7 +32,7 @@ public class CheckPermutation {
 
     //Hashmap looks unnecessary here cuz why we simply don't need hashing here
 
-    public static boolean chkPermutation(String str, String str2) {
+    public static boolean checkPermutation(String str, String str2) {
         char[] str1Arr = str.toCharArray();
         char[] str2Arr = str2.toCharArray();
         if(str1Arr.length != str2Arr.length){
@@ -60,9 +58,9 @@ public class CheckPermutation {
     }
 
     public static void main(String[] args){
-        System.out.println(chkPermutation("hello world", "olleh world"));
-        System.out.println(chkPermutation("hei amigos", "let's go over there"));
-        System.out.println(chkPermutation("aaaaa", "a"));
-        System.out.println(chkPermutation("bbbbb", "bbbbb"));
+        System.out.println(checkPermutation("hello world", "olleh world"));
+        System.out.println(checkPermutation("hei amigos", "let's go over there"));
+        System.out.println(checkPermutation("aaaaa", "a"));
+        System.out.println(checkPermutation("bbbbb", "bbbbb"));
     }
 }
