@@ -15,7 +15,6 @@ public class RotateMatrix {
     //Straightforward option 1:
     //To rotate matrix by 90 degrees we will create an additional matrix B
     //and write B[i][j] = A[j][i]
-
     //Complexity is O(n^2)
 
     //To rotate in place we just swap B[i][j] with a [j][i] - same O(n^2)
