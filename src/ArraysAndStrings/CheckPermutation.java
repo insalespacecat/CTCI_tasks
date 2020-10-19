@@ -30,8 +30,6 @@ public class CheckPermutation {
     //Iterate over strCompArr and check strCompArr[i][0] == strCompArr[i][1] - n
     //complexity O(n)
 
-    //Hashmap looks unnecessary here cuz why we simply don't need hashing here
-
     public static boolean checkPermutation(String str, String str2) {
         char[] str1Arr = str.toCharArray();
         char[] str2Arr = str2.toCharArray();
