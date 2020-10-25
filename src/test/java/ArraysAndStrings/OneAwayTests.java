@@ -9,7 +9,7 @@ public class OneAwayTests {
     private final OneAway classToTest = new OneAway();
 
     @Test
-    void tests(){
+    void AlgorithmTests(){
         assertTrue(classToTest.oneAway("pale", "ple"));
         assertTrue(classToTest.oneAway("pale", "pales"));
         assertTrue(classToTest.oneAway("pale", "bale"));
