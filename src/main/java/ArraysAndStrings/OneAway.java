@@ -1,4 +1,5 @@
-package ArraysAndStrings;
+package main.java.ArraysAndStrings;
+
 
 public class OneAway {
 
@@ -16,7 +17,7 @@ public class OneAway {
     //-> if(insertedCharacterMet) compare referenceStrArr[i] with editedStrArr[i+1] until referenceStrArr.length+1
     //Complexity will be O(n)
 
-    public static boolean oneAway(String referenceStr, String editedStr) {
+    public boolean oneAway(String referenceStr, String editedStr) {
         char[] referenceStrArr = referenceStr.toCharArray();
         char[] editedStrArr = editedStr.toCharArray();
         if(referenceStr.length() == editedStr.length()) {
@@ -50,7 +51,7 @@ public class OneAway {
         }
         if(referenceStr.length()+1 == editedStr.length()){
             boolean insertedCharacterMet = false;
-            for(int i = 0; i < referenceStr.length()+1; i++){
+            for(int i = 0; i < referenceStr.length(); i++){
                 if(insertedCharacterMet){
                     if(referenceStrArr[i] != editedStrArr[i+1]){
                         return false;
@@ -68,9 +69,5 @@ public class OneAway {
     }
 
     public static void main(String[] args){
-        System.out.println(oneAway("pale", "ple"));
-        System.out.println(oneAway("pales", "pale"));
-        System.out.println(oneAway("pale", "bale"));
-        System.out.println(oneAway("pale", "bake"));
     }
 }

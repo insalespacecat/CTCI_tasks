@@ -1,6 +1,4 @@
-package ArraysAndStrings;
-
-import java.util.Arrays;
+package main.java.ArraysAndStrings;
 
 public class ZeroMatrix {
 

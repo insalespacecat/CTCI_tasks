@@ -1,4 +1,4 @@
-package ArraysAndStrings;
+package main.java.ArraysAndStrings;
 
 public class URLify {
 

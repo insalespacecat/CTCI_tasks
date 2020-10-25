@@ -1,4 +1,4 @@
-package ArraysAndStrings;
+package main.java.ArraysAndStrings;
 
 public class CheckPermutation {
     //Implement an algorithm to decide if one string is a permutation of the other
