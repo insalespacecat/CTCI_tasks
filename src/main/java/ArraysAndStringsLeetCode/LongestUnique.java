@@ -28,36 +28,39 @@ public class LongestUnique {
     //string with letter 'h' and letter 'u'
     //It has problems if we implement it with first letters
 
-
+    //OK, best option i have actually learnt after seeing the explanation is to use "sliding window"
+    //The case here is that we use the same thing as option one but we will use pointers in a different
+    //way: pointers i and j, i is the beginning of the substring, j is the end of the substring. We push j
+    //while substring is valid, if substring becomes not valid, then we start to push our i pointer.
+    //This will have complexity N+N=O(N)
+    //Just need to implement it:)
 
     public int longestUnique(String str){
         char[] strArr = str.toCharArray();
-        HashSet<Character> buffer = new HashSet<>();
-        boolean NDM = true;
-        char DC = '['; boolean DCExists = false;
-        int longest = 0;
-        int SSIndex;
-        for(int i = 0; i < strArr.length; i++){
-            if(DCExists){
-                if(strArr[i] == DC){
-                    DCExists = false;
-                }
-                continue;
-            }
-            SSIndex = i;
-            while (NDM){
-                NDM = buffer.add(strArr[SSIndex]);
-                if(SSIndex < strArr.length-1) {
-                    SSIndex++;
+        HashSet<Character> currentSubstring = new HashSet<>();
+        int longestUnique = 0; int currentLength = 0;
+        int j = 0; int i = 0;
+        boolean valid = true;
+        while(j < strArr.length) {
+            while (valid && j < strArr.length) {
+                valid = currentSubstring.add(strArr[j]);
+                if(valid) {
+                    currentLength++;
+                    j++;
                 }
             }
-            DC = strArr[SSIndex]; DCExists = true;
-            if(longest < buffer.size())
-                longest = buffer.size();
-            NDM = true;
-            buffer.clear();
+            if (currentLength > longestUnique)
+                longestUnique = currentLength;
+            while (!valid && i < strArr.length) {
+                currentSubstring.remove(strArr[i]);
+                currentLength--;
+                i++;
+                valid = currentSubstring.add(strArr[j]);
+                if (valid)
+                    currentLength++; j++;
+            }
         }
-        return longest;
+        return longestUnique;
     }
 
     public static void main(String[] args){}
