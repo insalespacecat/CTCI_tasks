@@ -52,11 +52,14 @@ public class LongestUnique {
 
     public int longestUnique(String str){
         char[] strArr = str.toCharArray();
+        if(strArr.length == 1){
+            return 1;
+        }
         HashSet<Character> cache = new HashSet<>();
         int LU = 0;
         int j = 0; int i = 0;
         boolean valid = true;
-        while(j < strArr.length-1) {
+        while(j < strArr.length) {
             while (valid && j < strArr.length) {
                 valid = cache.add(strArr[j]);
                 if(valid) {

@@ -14,5 +14,6 @@ public class LongestUniqueTests {
         assertEquals(1, classToTest.longestUnique("bbbbbbbb"));
         assertEquals(3, classToTest.longestUnique("pwwkew"));
         assertEquals(2, classToTest.longestUnique("cdd"));
+        assertEquals(1, classToTest.longestUnique(" "));
     }
 }
