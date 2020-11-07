@@ -48,36 +48,34 @@ public class LongestUnique {
     //object, key, keyHash, pointer
     //that will consume far more memory then just an array of same size
 
+    //abbrev: LU = longest unique, CL = currentLength
 
     public int longestUnique(String str){
         char[] strArr = str.toCharArray();
-        HashSet<Character> currentSubstring = new HashSet<>();
-        int longestUnique = 0; int currentLength = 0;
+        HashSet<Character> cache = new HashSet<>();
+        int LU = 0;
         int j = 0; int i = 0;
         boolean valid = true;
         while(j < strArr.length-1) {
             while (valid && j < strArr.length) {
-                valid = currentSubstring.add(strArr[j]);
+                valid = cache.add(strArr[j]);
                 if(valid) {
-                    currentLength++;
                     j++;
                 }
             }
-            if (currentLength > longestUnique) {
-                longestUnique = currentLength;
+            if (cache.size() > LU) {
+                LU = cache.size();
             }
             while (!valid && i < strArr.length) {
-                currentSubstring.remove(strArr[i]);
-                currentLength--;
+                cache.remove(strArr[i]);
                 i++;
-                valid = currentSubstring.add(strArr[j]);
+                valid = cache.add(strArr[j]);
                 if (valid) {
-                    currentLength++;
                     j++;
                 }
             }
         }
-        return longestUnique;
+        return LU;
     }
 
     public static void main(String[] args){}
