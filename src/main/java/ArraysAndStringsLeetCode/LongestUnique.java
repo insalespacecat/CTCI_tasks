@@ -34,6 +34,20 @@ public class LongestUnique {
     //while substring is valid, if substring becomes not valid, then we start to push our i pointer.
     //This will have complexity N+N=O(N)
     //Just need to implement it:)
+    //We will assume ASCII extended encoding and any characters possible
+
+    //After implementation goes optimization:
+    //1) If we use Set then we could get rid of currentLength
+    //2) We could replace set with ASCII boolean array
+    //but memory efficiency of that is discussable
+    //our substring won't be longer than 256 symbols
+    //and in most cases it will be smaller then 256 symbols
+    //But HashSet consumes much more space then an array
+    //Cuz HashSet is a HashMap which stores pairs Key - New Object()
+    //and HashMap basically stores type Entry, which contains
+    //object, key, keyHash, pointer
+    //that will consume far more memory then just an array of same size
+
 
     public int longestUnique(String str){
         char[] strArr = str.toCharArray();
@@ -41,7 +55,7 @@ public class LongestUnique {
         int longestUnique = 0; int currentLength = 0;
         int j = 0; int i = 0;
         boolean valid = true;
-        while(j < strArr.length) {
+        while(j < strArr.length-1) {
             while (valid && j < strArr.length) {
                 valid = currentSubstring.add(strArr[j]);
                 if(valid) {
@@ -49,15 +63,18 @@ public class LongestUnique {
                     j++;
                 }
             }
-            if (currentLength > longestUnique)
+            if (currentLength > longestUnique) {
                 longestUnique = currentLength;
+            }
             while (!valid && i < strArr.length) {
                 currentSubstring.remove(strArr[i]);
                 currentLength--;
                 i++;
                 valid = currentSubstring.add(strArr[j]);
-                if (valid)
-                    currentLength++; j++;
+                if (valid) {
+                    currentLength++;
+                    j++;
+                }
             }
         }
         return longestUnique;
