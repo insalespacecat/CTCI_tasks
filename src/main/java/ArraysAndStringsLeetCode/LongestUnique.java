@@ -50,38 +50,29 @@ public class LongestUnique {
 
     //abbrev: LU = longest unique, CL = currentLength
 
-    public int longestUnique(String str){
-        char[] strArr = str.toCharArray();
-        if(strArr.length == 1){
+    public int longestUnique(String s){
+        if(s.length() == 1){
             return 1;
         }
         boolean[] ASCII = new boolean[128];
         int LU = 0; int CL = 0;
         int j = 0; int i = 0;
-        boolean valid = true;
-        while(j < strArr.length) {
-            while (valid && j < strArr.length) {
-                if(!ASCII[(int)strArr[j]]){
-                    ASCII[(int)strArr[j]] = true;
-                    valid = true;
-                    CL++;
-                } else {
-                    valid = false;
-                }
-                if(valid) {
-                    j++;
-                }
+        while(j < s.length()) {
+            while (j < s.length() && !ASCII[(int)s.charAt(j)]) {
+                ASCII[(int)s.charAt(j)] = true;
+                CL++;
+                j++;
             }
             if (CL > LU) {
                 LU = CL;
             }
-            while (!valid && i < strArr.length) {
-                ASCII[(int)strArr[i]] = false;
+            if(j == s.length()){
+                break;
+            }
+            while (i < s.length() && ASCII[(int)s.charAt(j)]) {
+                ASCII[(int)s.charAt(i)] = false;
                 i++;
                 CL--;
-                if(!ASCII[(int)strArr[j]]){
-                    valid = true;
-                }
             }
         }
         return LU;
