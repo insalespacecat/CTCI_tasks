@@ -55,26 +55,32 @@ public class LongestUnique {
         if(strArr.length == 1){
             return 1;
         }
-        HashSet<Character> cache = new HashSet<>();
-        int LU = 0;
+        boolean[] ASCII = new boolean[128];
+        int LU = 0; int CL = 0;
         int j = 0; int i = 0;
         boolean valid = true;
         while(j < strArr.length) {
             while (valid && j < strArr.length) {
-                valid = cache.add(strArr[j]);
+                if(!ASCII[(int)strArr[j]]){
+                    ASCII[(int)strArr[j]] = true;
+                    valid = true;
+                    CL++;
+                } else {
+                    valid = false;
+                }
                 if(valid) {
                     j++;
                 }
             }
-            if (cache.size() > LU) {
-                LU = cache.size();
+            if (CL > LU) {
+                LU = CL;
             }
             while (!valid && i < strArr.length) {
-                cache.remove(strArr[i]);
+                ASCII[(int)strArr[i]] = false;
                 i++;
-                valid = cache.add(strArr[j]);
-                if (valid) {
-                    j++;
+                CL--;
+                if(!ASCII[(int)strArr[j]]){
+                    valid = true;
                 }
             }
         }
