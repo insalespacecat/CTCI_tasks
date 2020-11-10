@@ -17,7 +17,7 @@ public class ZigZagConversion {
     //for(int i...) { for(int j...) ... } construction
     //Complexity of that is awful
 
-    public String convert(String s, int numRows) {
+    public String convertBruteForce(String s, int numRows) {
         if(numRows == 1){
             return s;
         }
@@ -60,6 +60,73 @@ public class ZigZagConversion {
         return SB.toString();
     }
 
+    public String convertOptimized(String s, int numRows){
+        if(numRows == 1){
+            return s;
+        }
+        StringBuilder sb = new StringBuilder(s.length());
+        //CTS = characters to skip
+        int CTSReference;
+        int CTS1;
+        int CTS2;
+        if (numRows == 2) {
+            CTSReference = 2;
+            CTS1 = 2;
+            CTS2 = 2;
+        } else {
+            CTSReference = 2 + ((numRows - 2) * 2);
+            CTS1 = ((numRows - 2) * 2);
+            CTS2 = 2;
+        }
+        boolean CTSSwitcher = false;
+        //p = pointer
+        int p = 0;
+        for(int i = 0; i < numRows; i++){
+            p = i;
+            switch (i){
+                case 0:
+                    while(p < s.length()){
+                        sb.append(s.charAt(p));
+                        p += CTSReference;
+                    }
+                    break;
+                case 1:
+                    while(p < s.length()){
+                        sb.append(s.charAt(p));
+                        if(!CTSSwitcher){
+                            p += CTS1;
+                            CTSSwitcher = true;
+                        } else {
+                            p += CTS2;
+                            CTSSwitcher = false;
+                        }
+                    }
+                    break;
+                default:
+                    CTSSwitcher = false;
+                    if(i == numRows-1){
+                        while(p < s.length()){
+                            sb.append(s.charAt(p));
+                            p += CTSReference;
+                        }
+                        break;
+                    }
+                    CTS1 -= 2;
+                    CTS2 += 2;
+                    while(p < s.length()) {
+                        sb.append(s.charAt(p));
+                        if (!CTSSwitcher) {
+                            p += CTS1;
+                            CTSSwitcher = true;
+                        } else {
+                            p += CTS2;
+                            CTSSwitcher = false;
+                        }
+                    }
+            }
+        }
+        return sb.toString();
+    }
 
     public static void main(String[] args){
     }

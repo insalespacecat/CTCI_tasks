@@ -10,9 +10,17 @@ public class ZigZagConversionTests {
     private final ZigZagConversion classToTest = new ZigZagConversion();
 
     @Test
-    void AlgorithmTests(){
-        assertEquals("PAHNAPLSIIGYIR", classToTest.convert("PAYPALISHIRING", 3));
-        assertEquals("AB", classToTest.convert("AB", 1));
-        assertEquals("ACB", classToTest.convert("ABC", 2));
+    void BruteForceAlgorithmTests(){
+        assertEquals("PAHNAPLSIIGYIR", classToTest.convertBruteForce("PAYPALISHIRING", 3));
+        assertEquals("AB", classToTest.convertBruteForce("AB", 1));
+        assertEquals("ACB", classToTest.convertBruteForce("ABC", 2));
+    }
+
+    @Test
+    void OptimizedAlgorithmTests(){
+        assertEquals("PAHNAPLSIIGYIR", classToTest.convertOptimized("PAYPALISHIRING", 3));
+        assertEquals("AB", classToTest.convertOptimized("AB", 1));
+        assertEquals("ACB", classToTest.convertOptimized("ABC", 2));
+        assertEquals("PINALSIGYAHRPI", classToTest.convertOptimized("PAYPALISHIRING", 4));
     }
 }
