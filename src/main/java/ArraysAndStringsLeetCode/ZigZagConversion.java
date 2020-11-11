@@ -64,6 +64,7 @@ public class ZigZagConversion {
     //it is enough to see the pattern how rows from 2nd to N-1 are changing
     //we can define CTS1 and CTS2, CTS1 = CTS, CTS2 = 1, and after that they change like CTS1 -= 2, CTS2 += 2;
     //until the last row, pretty straightforward.
+    //Complexity O(N)
 
     public String convertBruteForce(String s, int numRows) {
         if(numRows == 1){
