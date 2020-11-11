@@ -17,6 +17,54 @@ public class ZigZagConversion {
     //for(int i...) { for(int j...) ... } construction
     //Complexity of that is awful
 
+    //Optimized solution:
+    //It is clear that in order to optimize the algorithm we should throw the matrix away
+    //The thing why we implemented brute force is to see the pattern how we form each row in a more clear way
+    //So the pattern is the following:
+    //For example
+    //"PAYPALISHIRING" 3 rows
+    //P   A   H   N
+    //A P L S I I G
+    //Y   I   R
+    // first row:
+    // 3x-3x-3x-3x
+    // second row:
+    // 1x-1x-1x-1x
+    // third row:
+    // 3x-3x-3x
+    //"PAYPALISHIRING" 4 rows
+    //P     I    N
+    //A   L S  I G
+    //Y A   H R
+    //P     I
+    //To form the first row we skip 5 characters between each character
+    // 5x - 5x - 5x - 5x
+    //To form the 2nd row we skip
+    // 3x - 1x - 3x - 1x
+    //To form the 3rd we skip
+    // 1x - 3x - 1x - 3x
+    //To form the 4th
+    //5x - 5x - 5x - 5x
+    //"PAYPALISHIRING" 5 rows
+    //P       H
+    //A     S I
+    //Y   I   R
+    //P L     I G
+    //A       N
+    // 7x-7x-7x-7x
+    // 5x-1x-5x-1x
+    // 3x-3x-3x-3x
+    // 1x-5x-1x-5x
+    // 7x-7x-7x-7x
+    //The thing here is that number of characters we skip in the 1st and last rows is an arithmetic
+    //progression and can be calculated from number of rows using arithmetic progression formula:
+    //an = a1 + (n-2)d - original formula
+    //an = 2 + (numRows - 2) * 2
+    //After calculating the 1st and last CTS = characters to skip, we can get from those skips for each other row
+    //it is enough to see the pattern how rows from 2nd to N-1 are changing
+    //we can define CTS1 and CTS2, CTS1 = CTS, CTS2 = 1, and after that they change like CTS1 -= 2, CTS2 += 2;
+    //until the last row, pretty straightforward.
+
     public String convertBruteForce(String s, int numRows) {
         if(numRows == 1){
             return s;
