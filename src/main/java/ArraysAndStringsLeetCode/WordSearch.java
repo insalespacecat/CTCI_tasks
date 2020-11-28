@@ -2,11 +2,11 @@ package main.java.ArraysAndStringsLeetCode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 
 class C {
     int x;
     int y;
+
     C (int x, int y){
         this.x = x;
         this.y = y;
@@ -114,32 +114,123 @@ public class WordSearch {
     }
 
     private boolean checkIfExists(HashMap<Character, ArrayList<C>> map, String word){
-        boolean isFound = true;
+        if(map.size() == 0){
+            return false;
+        }
+        if(map.size() == 1){
+            return map.get(word.charAt(0)).size() >= word.length();
+        }
+        boolean isFound = false;
+        ArrayList<Integer> iAmbiguous = new ArrayList<Integer>();
+        ArrayList<HashMap<Character, ArrayList<C>>> mapStatesCache = new ArrayList<>();
         for(int i = 0; i < word.length()-1; i++){
             ArrayList<C> C1 = map.get(word.charAt(i));
             ArrayList<C> C2 = map.get(word.charAt(i+1));
             for(C c1: C1){
                 for(C c2: C2){
+                    isFound = false;
                     if(c1.x+1 == c2.x && c1.y == c2.y){
                         isFound = true;
-                        continue;
+                        c1.x = -10;
                     }
                     if(c1.x-1 == c2.x && c1.y == c2.y){
-                        isFound = true;
-                        continue;
+                        if(isFound){
+                            iAmbiguous.add(i);
+                            c1.x = -10;
+                            mapStatesCache.add(map);
+                        } else {
+                            isFound = true;
+                            c1.x = -10;
+                        }
+
                     }
                     if(c1.y-1 == c2.y && c1.x == c2.x){
-                        isFound = true;
-                        continue;
+                        if(isFound){
+                            iAmbiguous.add(i);
+                            c1.x = -10;
+                            mapStatesCache.add(map);
+                        } else {
+                            isFound = true;
+                            c1.x = -10;
+                        }
                     }
                     if(c1.y+1 == c2.y && c1.x == c2.x) {
-                        isFound = true;
-                    } else {
-                        isFound = false;
-                        break;
+                        if(isFound){
+                            iAmbiguous.add(i);
+                            c1.x = -10;
+                            mapStatesCache.add(map);
+                        } else {
+                            isFound = true;
+                            c1.x = -10;
+                        }
                     }
                 }
+                if(isFound){
+                    break;
+                }
             }
+            if(!isFound){
+                break;
+            }
+        }
+        if(!isFound){
+            int iANavigator = 0;
+                while(iAmbiguous.size() != 0) {
+                    for (int i = iAmbiguous.get(iANavigator); i < word.length() - 1; i++) {
+                        HashMap<Character, ArrayList<C>> mapCache = mapStatesCache.get(iANavigator);
+                        ArrayList<C> C1 = mapCache.get(word.charAt(i));
+                        ArrayList<C> C2 = mapCache.get(word.charAt(i + 1));
+                        for (C c1 : C1) {
+                            for (C c2 : C2) {
+                                if (c1.x + 1 == c2.x && c1.y == c2.y) {
+                                    isFound = true;
+                                    c1.x = -10;
+                                }
+                                if (c1.x - 1 == c2.x && c1.y == c2.y) {
+                                    if (isFound) {
+                                        iAmbiguous.add(i);
+                                        c1.x = -10;
+                                        mapStatesCache.add(map);
+                                    } else {
+                                        isFound = true;
+                                        c1.x = -10;
+                                    }
+
+                                }
+                                if (c1.y - 1 == c2.y && c1.x == c2.x) {
+                                    if (isFound) {
+                                        iAmbiguous.add(i);
+                                        c1.x = -10;
+                                        mapStatesCache.add(map);
+                                    } else {
+                                        isFound = true;
+                                        c1.x = -10;
+                                    }
+                                }
+                                if (c1.y + 1 == c2.y && c1.x == c2.x) {
+                                    if (isFound) {
+                                        iAmbiguous.add(i);
+                                        c1.x = -10;
+                                        mapStatesCache.add(map);
+                                    } else {
+                                        isFound = true;
+                                        c1.x = -10;
+                                    }
+                                } else {
+                                    isFound = false;
+                                }
+                            }
+                            if (isFound) {
+                                break;
+                            }
+                        }
+                        if (!isFound) {
+                            iAmbiguous.remove(iANavigator);
+                            break;
+                        }
+                    }
+                }
+
         }
         return isFound;
     }
