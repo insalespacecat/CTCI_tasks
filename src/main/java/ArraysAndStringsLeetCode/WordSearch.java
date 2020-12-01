@@ -111,6 +111,8 @@ public class WordSearch {
         return false;
     }
 
+    //OK EVERYTHING LISTED DOWN IS NOT THE RIGHT WAY TO SOLVE
+    // YOU SHOULD SEARCH FOR THE FIRST LETTER IN THE WORD AND RUN BFS
     // Abstract
     // Basically the task is simple: to check if the word exists we have to repeat one algorithm:
     // check if all the neighboring cells have the next letter in the word.
@@ -189,7 +191,7 @@ public class WordSearch {
     // So after each try if we will not find the word, we should return to this place, cross of of the
     // neighbors and go to another. ANd what if we meet another ambiguous choice out theree?? AA??
 
-
+    /*
     private HashMap<Character, ArrayList<C>> prepareAMap(char[][] board, String word){
         boolean[] wordChecker = new boolean[128];
         for(int i = 0; i < word.length(); i++){
@@ -342,6 +344,58 @@ public class WordSearch {
                 word
         );
     }
+*/
+    public boolean exist(char[][] board, String word){
+        for(int  i = 0; i < board.length; i++){
+            for(int  j = 0; j < board[i].length; j++){
+                if(board[i][j] == word.charAt(0) && dfs(board, i, j, 0, word)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
+    public boolean dfs(char[][] board, int i, int j, int count, String word ) {
+        //Leave the recursion
+        if(count == word.length()){
+            return false;
+        }
+        //Check out of bounds
+        if(i < 0 || i >= board.length || j < 0 || j >= board[i].length){
+            return false;
+        }
+        //Check if current cell corresponds the char in the word
+        if(board[i][j] != word.charAt(count)){
+           return false;
+        }
+        //Algorithm
+        //This recursion written the "classic" way, i.e. stop conditions in the start
+        //and the algorithm mess above
+        //What actually this algorithm mess does is it performs check of neighbors
+        //and if the neighbor satisfies the condition to be next char in the word
+        //the algo repeats (we go down), if it is not, then we go up.
+        //And we will achieve the result is needed to solve the task.
+        //Cuz of how recursion works and how we go up and down.
+        //Let's imagine that we have ambiguous situation:
+        //The recursion will pick the first entry, if it is false,
+        //Then it will go up and just pick the next entry and go downnn
+        //omggg i'm so stupid how couldn't i come up with THAT..
+
+        char temp = board[i][j];
+        board[i][j] = ' ';
+        boolean found =
+                dfs(board, i+1, j, count + 1, word) ||
+                dfs(board, i-1, j, count + 1, word) ||
+                dfs(board, i, j+1, count + 1, word) ||
+                dfs(board, i, j-1, count + 1, word);
+        board[i][j] = temp;
+        return found;
+    }
+
+
+    public boolean optimized(char[][] board, String word){
+        return exist(board, word);
+    }
     public static void main(String[] args){}
 }
