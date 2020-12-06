@@ -1,5 +1,6 @@
 package main.java.themes.ArraysAndStrings.LeetCode;
 
+/*
 class C {
     int x;
     int y;
@@ -9,8 +10,8 @@ class C {
         this.y = y;
     }
 }
+ */
 
-//TODO: Miscellaneous practice: Arrays&Strings, BFS, Recursion.
 public class WordSearch {
     // Given an m x n board and a word, find if the word exists in the grid.
     //
@@ -342,6 +343,14 @@ public class WordSearch {
         );
     }
 */
+
+    // YOU SHOULD SEARCH FOR THE FIRST LETTER IN THE WORD AND RUN BFS
+    // Abstract
+    // Basically the task is simple: to check if the word exists we have to repeat one algorithm:
+    // check if all the neighboring cells have the next letter in the word.
+    // i.e. 4 comparisons (x-1, x+1, y-1, y+1).
+    // if we find the next letter in the neighbor cell, then we are good and we can continue.
+    // if we do not find the next letter, then we break
     public boolean exist(char[][] board, String word){
         for(int  i = 0; i < board.length; i++){
             for(int  j = 0; j < board[i].length; j++){
@@ -353,7 +362,7 @@ public class WordSearch {
         return false;
     }
 
-    public boolean dfs(char[][] board, int i, int j, int count, String word ) {
+    public boolean dfs(char[][] board, int i, int j, int count, String word) {
         //Leave the recursion
         if(count == word.length()){
             return false;
@@ -395,4 +404,5 @@ public class WordSearch {
         return exist(board, word);
     }
     public static void main(String[] args){}
+
 }
