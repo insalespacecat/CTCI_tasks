@@ -65,6 +65,58 @@ public class FromAtoU {
         if(N <= 0){
             return N;
         }
-        return sumOfDigits(N/10) + (N - N/10*10);
+        return sumOfDigits(N / 10) + (N % 10);
     }
+
+    public String digitsRtl(int N){
+        if(N < 10){
+            return N + "";
+        }
+        return N%10 + " " + digitsRtl(N/10);
+    }
+
+    public String digitsLtr(int N){
+        if(N < 10){
+            return N + "";
+        }
+        return digitsLtr(N/10) + " " + N%10;
+    }
+
+    //D should be 1, cuz we can't divide by zero
+    public String checkSimplicity(int N, int D){
+        if(N%D == 0 && D != 1){
+            return "NO";
+        }
+        if(D == N/2) {
+            return "YES";
+        }
+        return checkSimplicity(N, D+1);
+    }
+
+    public void printSimpleDividers(int n, int k){
+        if (k > n / 2) {
+            System.out.println(n);
+            return;
+        }
+        if (n % k == 0) {
+            System.out.println(k);
+            printSimpleDividers(n / k, k);
+        }
+        else {
+            printSimpleDividers(n, ++k);
+        }
+    }
+
+    public String isAPalindrome(String s, int l, int r){
+        //Defines the exit condition
+        if(l > r){
+            return "YES";
+        }
+        if(s.charAt(l) != s.charAt(r)){
+            return "NO";
+        }
+        //Defines the recursion step
+        return isAPalindrome(s, l+1, r-1);
+    }
+
 }
