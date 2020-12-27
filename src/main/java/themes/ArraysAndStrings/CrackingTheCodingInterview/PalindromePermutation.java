@@ -12,7 +12,7 @@ public class PalindromePermutation {
     //The thing with the palindrome is that it consists from two parts and
     //these two parts have the same letters. It means that if we go over the phrase
     //calculate all the letters and check if every letter except middle (if number of letters is odd) can be divided by 2
-    //Let's consider the example dammit im mad
+    //Let's consider the example "dammit im mad"
     //Eliminating spaces it is dammitimmad
     //We have the following letters: 2*d 2*a 4*m 2*i 1*t
     //it is a palindrome cuz we have 1 anchor - t, all others can be divided by 2
