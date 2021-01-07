@@ -90,11 +90,11 @@ public class LongestPalindrome {
             return s;
         }
 
-        String lps = "";
+        String lps = ""; int a = 0; int b = 0;
         for(int i = 0; i < s.length(); i++){
-            int a = i; int b = i;
+            a = i; b = i;
             while(a >=0 && b < s.length()){
-                if(a-1 >= 0 && b+1 < s.length() && isAPalindrome(s.substring(a-1, b+2), 0, s.substring(a-1, b+2).length()-1)){
+                if(a-1 >= 0 && b+1 < s.length() && s.charAt(a-1) == s.charAt(b+1)){
                     a--;
                     b++;
                 } else {
@@ -111,11 +111,11 @@ public class LongestPalindrome {
         while(j < s.length() && i < s.length()){
 
             if(s.charAt(i) == s.charAt(j)){
-                int a = i;
-                int b = j;
+                a = i;
+                b = j;
 
                 while(a >= 0 && b < s.length()){
-                    if(a-1 >= 0 && b+1 < s.length() && isAPalindrome(s.substring(a-1, b+2), 0, s.substring(a-1, b+2).length()-1)){
+                    if(a-1 >= 0 && b+1 < s.length() && s.charAt(a-1) == s.charAt(b+1)){
                         a--;
                         b++;
                     } else {
