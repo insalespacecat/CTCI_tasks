@@ -11,7 +11,8 @@ public class DeleteMiddleNode {
     // So in order to eliminate the node as given we simply have to
     // assign to the given node pointer the value of the next node
     // like deleteNode(Node N)
-    // N = N.next();
+    // node.value = node.next.value;
+    // node.next = node.next.next;
 
     //You should also discuss extreme situation that the node given
     //is the last node, in this case we will just check that the next
@@ -19,7 +20,8 @@ public class DeleteMiddleNode {
 
     void deleteNode(Node node){
         if(node.next != null) {
-            node = node.next;
+            node.value = node.next.value;
+            node.next = node.next.next;
         }
     }
 

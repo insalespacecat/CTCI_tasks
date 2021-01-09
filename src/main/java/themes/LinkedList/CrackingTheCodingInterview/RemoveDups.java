@@ -1,10 +1,5 @@
 package main.java.themes.LinkedList.CrackingTheCodingInterview;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ListIterator;
-
 public class RemoveDups {
     //Write the code to remove duplicates from an unsorted linked list
 
@@ -26,16 +21,19 @@ public class RemoveDups {
     // We will iterate over the list only once, wiping out the node if it is
     // duplicated. This will take O(N) time.
 
-    //I think that this is very clumsy to write down each list problem because
-    //it consumes incredible amount of time. We will conspect briefly
-    //each problem and move forward and write the actual code and tests only for the
-    //hard ones.
-    public static LinkedList<Character> removeDups(LinkedList<Character> l){
-        boolean[] t = new boolean[128];
-        for(ListIterator<Character> i = l.listIterator(); i.hasNext();){
-
+    //s = starting node
+    public static void removeDups(Node s){
+        Node i = s;
+        boolean[] ASCII128 = new boolean[128];
+        while(i.next != null) {
+            if (ASCII128[i.value]) {
+                i.value = i.next.value;
+                i.next = i.next.next;
+            } else {
+                ASCII128[i.value] = true;
+            }
+            i = i.next;
         }
-        return null;
     }
 
 }
