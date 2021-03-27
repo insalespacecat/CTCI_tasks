@@ -24,5 +24,4 @@ public class DeleteMiddleNode {
             node.next = node.next.next;
         }
     }
-
 }

@@ -57,8 +57,69 @@ public class CheckPermutation {
 
     public static void main(String[] args){
         System.out.println(checkPermutation("hello world", "olleh world"));
-        System.out.println(checkPermutation("hei amigos", "let's go over there"));
+        System.out.println(checkPermutation("hei amigos", "let's go over here"));
         System.out.println(checkPermutation("aaaaa", "a"));
         System.out.println(checkPermutation("bbbbb", "bbbbb"));
     }
 }
+
+//JS version:
+/*
+not so memory efficient, but working:
+function checkPermutation(str1, str2) {
+  const str1Arr = str1.split('');
+  const str2Arr = str2.split('');
+
+  if(str1Arr.length !== str2Arr.length) {
+    return false;
+  }
+
+  const strCompArr1 = {};
+  const strCompArr2 = {};
+
+   for(let i = 0; i < str1Arr.length; i++) {
+      strCompArr1[str1Arr[i]]? strCompArr1[str1Arr[i]]++ : strCompArr1[str1Arr[i]] = 1;
+      strCompArr2[str2Arr[i]]? strCompArr2[str2Arr[i]]++ : strCompArr2[str2Arr[i]] = 1;
+   }
+
+   for(let key of Object.keys(strCompArr1)) {
+     if(strCompArr2[key] !== strCompArr1[key]) {
+        return false;
+     }
+    }
+
+   return true;
+
+   time complexity still O(N)
+}
+
+NOT WORKING?? PROBLEM WITH str1Arr[i].charCodeAt() - changes the whole array?
+function checkPermutation(str1, str2) {
+  const str1Arr = str1.split('');
+  const str2Arr = str2.split('');
+
+  if(str1Arr.length !== str2Arr.length) {
+    return false;
+  }
+
+   const strCompArr = Array(128).fill(Array(2));
+
+   strCompArr.forEach(value => {
+     value[0] = 0;
+     value[1] = 0;
+   });
+
+   for(let i = 0; i < str1Arr.length; i++) {
+      strCompArr[str1Arr[i].charCodeAt(0)][0] += 1;
+      strCompArr[str2Arr[i].charCodeAt(0)][1] += 1;
+   }
+
+   for(let i = 0; i < str1Arr.length; i++){
+     if (strCompArr[str1Arr[i].charCodeAt(0)][0] !== strCompArr[str1Arr[i].charCodeAt(0)][1]) {
+       return false;
+     }
+   }
+
+   return true;
+}
+ */
