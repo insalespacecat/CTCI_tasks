@@ -7,7 +7,6 @@
 // var c = chain({sum: sum, minus: minus, double: double, addOne: addOne});
 
 function sum(x, y) {
-    console.log('sum x:' + this.x);
     if(!y) {
         return this.x + x;
     }
@@ -15,7 +14,6 @@ function sum(x, y) {
 }
 
 function double(x) {
-    console.log('double x:' + this.x);
     if(!x) {
         return sum(this.x, this.x);
     }
@@ -23,7 +21,6 @@ function double(x) {
 }
 
 function minus (x, y) {
-    console.log('minus x:' + this.x);
     if(!y) {
         return this.x - x;
     }
@@ -31,7 +28,6 @@ function minus (x, y) {
 }
 
 function addOne(x) {
-    console.log('add one x:' + this.x);
     if(!x) {
         return sum(this.x, 1);
     }
@@ -43,7 +39,7 @@ function chain(fns) {
     let callStack = [];
 
     for(let key in fns) {
-        context[key] = (o, p) => {
+        context[key] = function (o, p) {
             if(p) {
                 callStack.push(() => {context.x = fns[key].call(context, o, p)});
             } else {
@@ -65,3 +61,24 @@ function chain(fns) {
 }
 
 var c = chain({sum: sum, minus: minus, double: double, addOne: addOne});
+
+function chainFunctions(fns) {
+    for (let fname in fns) {
+        let originalFn = fns[fname];
+
+        this[fname] = function (...args) {
+            if (this.result != null) {
+                args.splice(0, 0, this.result);
+            }
+            let cloneCF = new chainFunctions(fns);
+            cloneCF.result = originalFn.apply(this, args);
+            return cloneCF;
+        }
+    }
+}
+
+chainFunctions.prototype.execute = function() { return this.result; }
+
+function chain(fns) {
+    return new chainFunctions(fns);
+}
