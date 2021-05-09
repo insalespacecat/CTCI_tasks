@@ -89,17 +89,23 @@ function addTwoNumbersRec(l1, l2, lr) {
     }
 
     if(l1 && l2) {
-        lrNewVal(lr, l1.val + l2.val);
+        let res = lr.val + l1.val + l2.val
+        lr.val = 0;
+        lrNewVal(lr, res);
         addTwoNumbersRec(l1.next, l2.next, lr.next);
     }
 
     if(!l1) {
-        lrNewVal(lr, l2.val + lr.val);
+        let res = l2.val + lr.val;
+        lr.val = 0;
+        lrNewVal(lr, res);
         addTwoNumbersRec(l1, l2.next, lr.next);
     }
 
     if(!l2) {
-        lrNewVal(lr, l1.val + lr.val);
+        let res = l1.val + lr.val;
+        lr.val = 0;
+        lrNewVal(lr, res);
         addTwoNumbersRec(l1.next, l2, lr.next);
     }
 }
@@ -107,7 +113,10 @@ function addTwoNumbersRec(l1, l2, lr) {
 function lrNewVal(lr, res) {
     if(res >= 10) {
         lr.val += res % 10;
-        lr.next.val = (res - lr.val) / 10;
+        if(!lr.next) {
+            lr.next = new ListNode(0, null);
+        }
+        lr.next.val += (res - res % 10) / 10;
     } else {
         lr.val += res;
     }
