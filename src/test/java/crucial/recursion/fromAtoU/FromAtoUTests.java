@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 public class FromAtoUTests {
     FromAtoU classToTest = new FromAtoU();
+
     @Test
     public void TestAlgorithm(){
         System.out.println(classToTest.naturalNumbers(10));
