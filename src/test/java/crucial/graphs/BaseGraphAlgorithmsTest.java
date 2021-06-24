@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class BaseGraphAlgorithmsTest {
 
     private static Graph[] graphs;
+    private final BaseGraphAlgorithms graphAlg = new BaseGraphAlgorithms();
 
     @BeforeAll
     public static void graphsInit() {
@@ -40,8 +41,6 @@ public class BaseGraphAlgorithmsTest {
 
     @Test
     public void DFSTest() {
-        var graphAlg = new BaseGraphAlgorithms();
-
         assertTrue(graphAlg.DFS(4, 3, graphs[0], new boolean[5]));
         assertFalse(graphAlg.DFS(5, 2, graphs[0], new boolean[5]));
 
@@ -50,6 +49,18 @@ public class BaseGraphAlgorithmsTest {
 
         assertTrue(graphAlg.DFS(2, 4, graphs[2], new boolean[5]));
         assertFalse(graphAlg.DFS(3, 5, graphs[2], new boolean[5]));
+    }
+
+    @Test
+    public void BFSTest() {
+        assertTrue(graphAlg.BFS(4, 3, graphs[0], new boolean[5]));
+        assertFalse(graphAlg.BFS(5, 2, graphs[0], new boolean[5]));
+
+        assertTrue(graphAlg.BFS(2, 3, graphs[1], new boolean[4]));
+        assertFalse(graphAlg.BFS(0, 5, graphs[1], new boolean[4]));
+
+        assertTrue(graphAlg.BFS(2, 4, graphs[2], new boolean[5]));
+        assertFalse(graphAlg.BFS(3, 5, graphs[2], new boolean[5]));
     }
 
 }

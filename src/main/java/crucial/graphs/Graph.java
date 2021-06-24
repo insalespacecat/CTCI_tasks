@@ -9,14 +9,4 @@ public class Graph {
         this.vc = numberOfVertices;
     }
 
-    public void addEdge(int i, int j) {
-        adjM[i][j] = true;
-        adjM[j][i] = true;
-    }
-
-    public void removeEdge(int i, int j) {
-        adjM[i][j] = false;
-        adjM[j][i] = true;
-    }
-
 }
