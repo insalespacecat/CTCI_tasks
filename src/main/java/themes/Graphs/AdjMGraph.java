@@ -1,9 +1,18 @@
-package main.java.crucial.graphs;
+package main.java.themes.Graphs;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
-public class BaseGraphAlgorithms {
+public class AdjMGraph {
+    public boolean[][] adjM;
+    public List<List<Integer>> adjList;
+    public int vc;
+
+    public AdjMGraph(int numberOfVertices) {
+        this.adjM = new boolean[numberOfVertices][numberOfVertices];
+        this.vc = numberOfVertices;
+    }
 
     //Depth-first search is an algorithm which uses a stack in order to recursively traverse the
     //tree branches that come from the vertex given until they hit the bottom of the branch
@@ -19,7 +28,7 @@ public class BaseGraphAlgorithms {
 
     //vN - vertex number
     //vTF - vertex to find
-    public boolean DFS(int vN, int vTF, Graph graph, boolean[] algLog) {
+    public static boolean DFS(int vN, int vTF, AdjMGraph graph, boolean[] algLog) {
         if(vTF == vN) {
             return true;
         }
@@ -78,7 +87,7 @@ public class BaseGraphAlgorithms {
     //So you don't need to actually "step back up" the graph
     //you can directly go into the vertex you scheduled
 
-    public boolean BFS(int vN, int vTF, Graph graph, boolean[] algLog) {
+    public static boolean BFS(int vN, int vTF, AdjMGraph graph, boolean[] algLog) {
         if(vTF >= graph.adjM.length || vN >= graph.adjM.length) {
             return false;
         }
@@ -98,7 +107,7 @@ public class BaseGraphAlgorithms {
         return res;
     }
 
-    private boolean checkNbs(int vN, int vTF, Graph graph, boolean[] algLog, Queue<Integer> queue) {
+    private static boolean checkNbs(int vN, int vTF, AdjMGraph graph, boolean[] algLog, Queue<Integer> queue) {
         for(int i = 0; i < graph.adjM[vN].length; i++) {
             if(graph.adjM[vN][i] && !algLog[i]) {
                 algLog[i] = true;
@@ -112,5 +121,6 @@ public class BaseGraphAlgorithms {
 
         return false;
     }
+
 
 }

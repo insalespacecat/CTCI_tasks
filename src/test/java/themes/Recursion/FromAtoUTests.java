@@ -1,6 +1,6 @@
-package test.java.crucial.recursion.fromAtoU;
+package test.java.themes.Recursion;
 
-import main.java.crucial.recursion.fromAtoU.FromAtoU;
+import main.java.themes.Recursion.fromAtoU.FromAtoU;
 import org.junit.jupiter.api.Test;
 
 public class FromAtoUTests {

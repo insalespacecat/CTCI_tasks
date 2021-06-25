@@ -1,25 +1,23 @@
-package test.java.crucial.graphs;
+package test.java.themes.Graphs;
 
-import main.java.crucial.graphs.BaseGraphAlgorithms;
-import main.java.crucial.graphs.Graph;
+import main.java.themes.Graphs.AdjMGraph;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class BaseGraphAlgorithmsTest {
+public class AdjMGraphAlgorithmsTest {
 
-    private static Graph[] graphs;
-    private final BaseGraphAlgorithms graphAlg = new BaseGraphAlgorithms();
+    private static AdjMGraph[] graphs;
 
     @BeforeAll
     public static void graphsInit() {
-        graphs = new Graph[3];
+        graphs = new AdjMGraph[3];
 
-        graphs[0] = new Graph(5);
-        graphs[1] = new Graph(4);
-        graphs[2] = new Graph(5);
+        graphs[0] = new AdjMGraph(5);
+        graphs[1] = new AdjMGraph(4);
+        graphs[2] = new AdjMGraph(5);
 
         graphs[0].adjM[0] = new boolean[]{false, true, false, true, true};
         graphs[0].adjM[1] = new boolean[]{true, false, true, true, false};
@@ -41,26 +39,26 @@ public class BaseGraphAlgorithmsTest {
 
     @Test
     public void DFSTest() {
-        assertTrue(graphAlg.DFS(4, 3, graphs[0], new boolean[5]));
-        assertFalse(graphAlg.DFS(5, 2, graphs[0], new boolean[5]));
+        assertTrue(AdjMGraph.DFS(4, 3, graphs[0], new boolean[5]));
+        assertFalse(AdjMGraph.DFS(5, 2, graphs[0], new boolean[5]));
 
-        assertTrue(graphAlg.DFS(2, 3, graphs[1], new boolean[4]));
-        assertFalse(graphAlg.DFS(0, 5, graphs[1], new boolean[4]));
+        assertTrue(AdjMGraph.DFS(2, 3, graphs[1], new boolean[4]));
+        assertFalse(AdjMGraph.DFS(0, 5, graphs[1], new boolean[4]));
 
-        assertTrue(graphAlg.DFS(2, 4, graphs[2], new boolean[5]));
-        assertFalse(graphAlg.DFS(3, 5, graphs[2], new boolean[5]));
+        assertTrue(AdjMGraph.DFS(2, 4, graphs[2], new boolean[5]));
+        assertFalse(AdjMGraph.DFS(3, 5, graphs[2], new boolean[5]));
     }
 
     @Test
     public void BFSTest() {
-        assertTrue(graphAlg.BFS(4, 3, graphs[0], new boolean[5]));
-        assertFalse(graphAlg.BFS(5, 2, graphs[0], new boolean[5]));
+        assertTrue(AdjMGraph.BFS(4, 3, graphs[0], new boolean[5]));
+        assertFalse(AdjMGraph.BFS(5, 2, graphs[0], new boolean[5]));
 
-        assertTrue(graphAlg.BFS(2, 3, graphs[1], new boolean[4]));
-        assertFalse(graphAlg.BFS(0, 5, graphs[1], new boolean[4]));
+        assertTrue(AdjMGraph.BFS(2, 3, graphs[1], new boolean[4]));
+        assertFalse(AdjMGraph.BFS(0, 5, graphs[1], new boolean[4]));
 
-        assertTrue(graphAlg.BFS(2, 4, graphs[2], new boolean[5]));
-        assertFalse(graphAlg.BFS(3, 5, graphs[2], new boolean[5]));
+        assertTrue(AdjMGraph.BFS(2, 4, graphs[2], new boolean[5]));
+        assertFalse(AdjMGraph.BFS(3, 5, graphs[2], new boolean[5]));
     }
 
 }

@@ -1,4 +1,4 @@
-package main.java.crucial.recursion.fromAtoU;
+package main.java.themes.Recursion.fromAtoU;
 
 public class FromAtoU {
 
