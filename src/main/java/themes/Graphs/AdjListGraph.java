@@ -18,8 +18,8 @@ public class AdjListGraph {
     }
 
     public static boolean compareGraphs(Node s, Node sC, boolean[] algLog) {
-        StringBuilder ns = new StringBuilder("[");
-        StringBuilder ns2 = new StringBuilder("[");
+        StringBuilder ns = new StringBuilder(s.val + ": [");
+        StringBuilder ns2 = new StringBuilder(sC.val + ": [");
 
         for(Node n : s.neighbors) {
             ns.append(n.val).append(" ");
@@ -41,10 +41,11 @@ public class AdjListGraph {
         }
 
         if(sC.neighbors.size() != s.neighbors.size()) {
-            //return false;
+            return false;
         }
 
         var res = true;
+        algLog[s.val] = true;
 
         for(Node n: s.neighbors) {
             var nC = findMatchingNode(n, sC.neighbors);
@@ -54,7 +55,6 @@ public class AdjListGraph {
             }
 
             if (!algLog[n.val]) {
-                algLog[n.val] = true;
                 res = compareGraphs(n, nC, algLog);
             }
         }
@@ -95,17 +95,18 @@ public class AdjListGraph {
     //sCM.put(neighbor.val, sCL);
 
     public static void deepCloneGraph(Node s, Node s2, boolean[] algLog, Map<Integer, List<Node>> sCM) {
+        algLog[s.val] = true;
+
         if(s.neighbors.size() == 0) {
             return;
         }
 
         for(Node n : s.neighbors) {
             if(!algLog[n.val]) {
-                algLog[n.val] = true;
                 var n2 = new Node(n.val, new ArrayList<>(List.of(s2)));
                 s2.neighbors.add(n2);
                 deepCloneGraph(n, n2, algLog, sCM);
-            } else {
+            } else if(findMatchingNode(n, s2.neighbors) == null) {
                 var sCL = sCM.get(n.val);
                 if(sCL == null) {
                     sCL = new ArrayList<Node>();
