@@ -59,7 +59,7 @@ public class CourseSchedule1 {
         //sP = starting point;
         //var sP = findStartingPoint(graph);
 
-        for(Node n : graph) {
+        for(AdjListNode n : graph) {
             if(n != null && checkGraphForCycles(n, new boolean[5001], new boolean[5001])) {
                 return false;
             }
@@ -155,8 +155,8 @@ public class CourseSchedule1 {
 
     //pr = prerequisites
 
-    public Node[] createGraphFromPrereq(int[][] pr) {
-        Node[] graph = new Node[5000];
+    public AdjListNode[] createGraphFromPrereq(int[][] pr) {
+        AdjListNode[] graph = new AdjListNode[5000];
 
         for(int i = 0; i < pr.length; i++) {
             if(pr[i][0] >= graph.length ||
@@ -166,11 +166,11 @@ public class CourseSchedule1 {
             }
 
             if(graph[pr[i][0]] == null) {
-                graph[pr[i][0]] = new Node(pr[i][0], new ArrayList<Node>());
+                graph[pr[i][0]] = new AdjListNode(pr[i][0], new ArrayList<AdjListNode>());
             }
 
             if(graph[pr[i][1]] == null) {
-                graph[pr[i][1]] = new Node(pr[i][1], new ArrayList<Node>());
+                graph[pr[i][1]] = new AdjListNode(pr[i][1], new ArrayList<AdjListNode>());
             }
 
             graph[pr[i][1]].neighbors.add(graph[pr[i][0]]);
@@ -183,13 +183,13 @@ public class CourseSchedule1 {
     //sN = starting Node;
     //cC = cycle checklist new boolean[graph.length];
     //true - cycle detected
-    public boolean checkGraphForCycles(Node sN, boolean[] cC, boolean[] algLog) {
+    public boolean checkGraphForCycles(AdjListNode sN, boolean[] cC, boolean[] algLog) {
         algLog[sN.val] = true;
         cC[sN.val] = true;
 
         var res = false;
 
-        for(Node n : sN.neighbors) {
+        for(AdjListNode n : sN.neighbors) {
             if(cC[n.val]) {
                 return true;
             }

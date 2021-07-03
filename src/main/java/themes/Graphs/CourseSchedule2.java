@@ -1,86 +1,46 @@
 package main.java.themes.Graphs;
 
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
+public class CourseSchedule2 {
+    public int[] findOrder(int numCourses, int[][] prerequisites) {
+        if(prerequisites.length == 0 && numCourses > 0) {
+            var res = new int[numCourses];
+            for(int i = 0; i < numCourses; i++) {
+                res[i] = i;
+            }
+            return res;
+        }
 
-//https://leetcode.com/problems/course-schedule/
-//There are a total of numCourses courses you have to take, labeled from 0 to numCourses - 1.
-//You are given an array prerequisites where prerequisites[i] = [ai, bi] indicates that you must take course
-//bi first if you want to take course ai.
-//
-//For example, the pair [0, 1], indicates that to take course 0 you have to first take course 1.
-//
-//Return true if you can finish all courses. Otherwise, return false.
-
-public class TopologicalSort {
-    //1) prereq is not adjacency list. So we have to take it and construct graph as adjacency list based on it.
-    //2) use topological sort on graph in order to find the order of course taking:
-    // - if order is found, return true.
-    // - if algorithm fails return false.
-
-    //Example 3:
-    //numCourses = 7
-    //prereq = [[2, 1],[3, 1],[4, 2],[5, 2],[6, 3],[7, 5]]
-
-    //***Convert prereq to adjL
-    //1) create empty AdjListGraph with size prereq+1;
-    //var aL = new Node[prereq.length + 1];
-    //2) Start with node 1
-    // if list does not contain it -> create node 1
-    // if list does not contain node it depends on -> create nodeDep
-    // nodeDep.neighbors.add(node1)
-    //for each p : prereq
-    // if al[p[0]] == null {
-    //    aL[p[0]] = new ArrayList<Node>();
-    // }
-    // if(aL[p[1]] == null) {
-    //    aL[p[1]] = List.of(new Node(p[0]));
-    // } else {
-    //    aL[p[1]].add(new Node(p[0]);
-    //}
-    //edgeCase: what if we have a cyclic graph on this step?
-    //prereq = [[2, 1],[3, 1],[4, 2],[5, 2],[6, 3],[7, 5]]
-    //***Check graph for cycles **otherwise top sort with cause stack overflow is it is DCG
-    //***Fire up topological sort
-
-    public boolean canFinish(int numCourses, int[][] prerequisites) {
         if(prerequisites.length == 0) {
-            return true;
+            return new int[0];
         }
 
         var graph = createGraphFromPrereq(prerequisites);
 
         if(graph == null) {
-            return false;
+            return new int[0];
         }
-
-        System.out.println("Graph created from prereq...");
-        for(int i = 0; i < graph.length; i++) {
-            if(graph[i] != null) {
-                System.out.println(i + ": " + graph[i].neighbors.stream().map(s -> s.val).collect(Collectors.toList()));
-            }
-        }
-
         //sP = starting point;
         var sP = findStartingPoint(graph);
 
         System.out.println("Checking for cycles...");
 
         if(checkGraphForCycles(sP, new boolean[5000], new boolean[5000])) {
-            System.out.println("Graph contains cycles!");
-            return false;
+            return new int[0];
         }
 
         var tO = getTopologicalOrder(
-                sP, new boolean[5000], new StringBuilder()
+                sP, new boolean[5000], new StringBuilder(String.valueOf(sP.val))
         ).toString();
-        System.out.println("Topological order: " + tO);
-        var tON = tO.split("").length;
-        System.out.println(tON);
-        System.out.println(tON+1);
 
-        return tON+2 >= numCourses;
+        var sA = tO.split("");
+        var iA = new int[sA.length];
+        for(int i = sA.length-1; i > 0; i--) {
+            iA[sA.length-i] = Integer.parseInt(sA[i]);
+        }
+
+        return iA;
     }
 
     //returns node starting from which you can cover most of the nodes
@@ -108,9 +68,6 @@ public class TopologicalSort {
 
             i++;
         }
-
-        System.out.println("Starting point is " + adjListNode.val);
-        System.out.println("With " + i + " available nodes");
 
         return adjListNode;
     }

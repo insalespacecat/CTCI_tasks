@@ -3,29 +3,29 @@ package main.java.themes.Graphs;
 import java.util.*;
 
 public class AdjListGraph {
-    public List<Node> adjList;
+    public List<AdjListNode> adjList;
 
     public AdjListGraph() {
-        this.adjList = List.of(new Node(1));
+        this.adjList = List.of(new AdjListNode(1));
     }
 
-    public AdjListGraph(Node node) {
-        this.adjList = List.of(node);
+    public AdjListGraph(AdjListNode adjListNode) {
+        this.adjList = List.of(adjListNode);
     }
 
-    public AdjListGraph(Node[] nodes) {
-        this.adjList = Arrays.asList(nodes);
+    public AdjListGraph(AdjListNode[] adjListNodes) {
+        this.adjList = Arrays.asList(adjListNodes);
     }
 
-    public static boolean compareGraphs(Node s, Node sC, boolean[] algLog) {
+    public static boolean compareGraphs(AdjListNode s, AdjListNode sC, boolean[] algLog) {
         StringBuilder ns = new StringBuilder(s.val + ": [");
         StringBuilder ns2 = new StringBuilder(sC.val + ": [");
 
-        for(Node n : s.neighbors) {
+        for(AdjListNode n : s.neighbors) {
             ns.append(n.val).append(" ");
         }
 
-        for(Node n : sC.neighbors) {
+        for(AdjListNode n : sC.neighbors) {
             ns2.append(n.val).append(" ");
         }
 
@@ -47,7 +47,7 @@ public class AdjListGraph {
         var res = true;
         algLog[s.val] = true;
 
-        for(Node n: s.neighbors) {
+        for(AdjListNode n: s.neighbors) {
             var nC = findMatchingNode(n, sC.neighbors);
 
             if (nC == null) {
@@ -62,9 +62,9 @@ public class AdjListGraph {
         return res;
     }
 
-    public static Node findMatchingNode(Node node, List<Node> nodes) {
-        for(Node n: nodes) {
-            if(n.val == node.val) {
+    public static AdjListNode findMatchingNode(AdjListNode adjListNode, List<AdjListNode> adjListNodes) {
+        for(AdjListNode n: adjListNodes) {
+            if(n.val == adjListNode.val) {
                 return n;
             }
         }
@@ -72,10 +72,10 @@ public class AdjListGraph {
         return null;
     }
 
-    public static Node cloneGraph(Node node) {
+    public static AdjListNode cloneGraph(AdjListNode adjListNode) {
         //Tasks sets a bound for number of vertices no more than 100
-        var s2 = new Node(1);
-        deepCloneGraph(node, s2, new boolean[100], new HashMap<Integer, List<Node>>());
+        var s2 = new AdjListNode(1);
+        deepCloneGraph(adjListNode, s2, new boolean[100], new HashMap<Integer, List<AdjListNode>>());
         return s2;
     }
 
@@ -94,22 +94,22 @@ public class AdjListGraph {
     //sCL.add(n1C);
     //sCM.put(neighbor.val, sCL);
 
-    public static void deepCloneGraph(Node s, Node s2, boolean[] algLog, Map<Integer, List<Node>> sCM) {
+    public static void deepCloneGraph(AdjListNode s, AdjListNode s2, boolean[] algLog, Map<Integer, List<AdjListNode>> sCM) {
         algLog[s.val] = true;
 
         if(s.neighbors.size() == 0) {
             return;
         }
 
-        for(Node n : s.neighbors) {
+        for(AdjListNode n : s.neighbors) {
             if(!algLog[n.val]) {
-                var n2 = new Node(n.val, new ArrayList<>(List.of(s2)));
+                var n2 = new AdjListNode(n.val, new ArrayList<>(List.of(s2)));
                 s2.neighbors.add(n2);
                 deepCloneGraph(n, n2, algLog, sCM);
             } else if(findMatchingNode(n, s2.neighbors) == null) {
                 var sCL = sCM.get(n.val);
                 if(sCL == null) {
-                    sCL = new ArrayList<Node>();
+                    sCL = new ArrayList<AdjListNode>();
                 }
                 sCL.add(s2);
                 sCM.put(n.val, sCL);
@@ -118,7 +118,7 @@ public class AdjListGraph {
 
         var sCL = sCM.get(s2.val);
         if(sCL != null) {
-            for (Node sC : sCL) {
+            for (AdjListNode sC : sCL) {
                 s2.neighbors.add(sC);
                 sC.neighbors.add(s2);
             }

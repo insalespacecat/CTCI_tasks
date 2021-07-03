@@ -1,11 +1,10 @@
 package test.java.themes.Graphs;
 
 import main.java.themes.Graphs.AdjListGraph;
-import main.java.themes.Graphs.Node;
+import main.java.themes.Graphs.AdjListNode;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -19,46 +18,46 @@ public class AdjListGraphAlgorithmsTest {
     public static void GraphsInit() {
         graphs = new AdjListGraph[3];
 
-        Node[] g1Nodes = new Node[7];
-        Node[] g2Nodes = new Node[8];
-        Node[] g3Nodes = new Node[6];
+        AdjListNode[] g1AdjListNodes = new AdjListNode[7];
+        AdjListNode[] g2AdjListNodes = new AdjListNode[8];
+        AdjListNode[] g3AdjListNodes = new AdjListNode[6];
 
-        simpleNodesInit(g1Nodes);
-        simpleNodesInit(g2Nodes);
-        simpleNodesInit(g3Nodes);
+        simpleNodesInit(g1AdjListNodes);
+        simpleNodesInit(g2AdjListNodes);
+        simpleNodesInit(g3AdjListNodes);
 
-        g1Nodes[0].neighbors = List.of(g1Nodes[1]);
-        g1Nodes[1].neighbors = List.of(g1Nodes[0], g1Nodes[2], g1Nodes[3]);
-        g1Nodes[2].neighbors = List.of(g1Nodes[1], g1Nodes[3], g1Nodes[4]);
-        g1Nodes[3].neighbors = List.of(g1Nodes[1], g1Nodes[2]);
-        g1Nodes[4].neighbors = List.of(g1Nodes[2], g1Nodes[6]);
-        g1Nodes[5].neighbors = List.of(g1Nodes[6]);
-        g1Nodes[6].neighbors = List.of(g1Nodes[4], g1Nodes[5]);
+        g1AdjListNodes[0].neighbors = List.of(g1AdjListNodes[1]);
+        g1AdjListNodes[1].neighbors = List.of(g1AdjListNodes[0], g1AdjListNodes[2], g1AdjListNodes[3]);
+        g1AdjListNodes[2].neighbors = List.of(g1AdjListNodes[1], g1AdjListNodes[3], g1AdjListNodes[4]);
+        g1AdjListNodes[3].neighbors = List.of(g1AdjListNodes[1], g1AdjListNodes[2]);
+        g1AdjListNodes[4].neighbors = List.of(g1AdjListNodes[2], g1AdjListNodes[6]);
+        g1AdjListNodes[5].neighbors = List.of(g1AdjListNodes[6]);
+        g1AdjListNodes[6].neighbors = List.of(g1AdjListNodes[4], g1AdjListNodes[5]);
 
-        g2Nodes[0].neighbors = List.of(g2Nodes[1], g2Nodes[2]);
-        g2Nodes[1].neighbors = List.of(g2Nodes[0], g2Nodes[3]);
-        g2Nodes[2].neighbors = List.of(g2Nodes[0], g2Nodes[3]);
-        g2Nodes[3].neighbors = List.of(g2Nodes[2], g2Nodes[4]);
-        g2Nodes[4].neighbors = List.of(g2Nodes[7], g2Nodes[6], g2Nodes[5]);
-        g2Nodes[5].neighbors = List.of(g2Nodes[4], g2Nodes[6]);
-        g2Nodes[6].neighbors = List.of(g2Nodes[4], g2Nodes[5], g2Nodes[7]);
-        g2Nodes[7].neighbors = List.of(g2Nodes[4], g2Nodes[6]);
+        g2AdjListNodes[0].neighbors = List.of(g2AdjListNodes[1], g2AdjListNodes[2]);
+        g2AdjListNodes[1].neighbors = List.of(g2AdjListNodes[0], g2AdjListNodes[3]);
+        g2AdjListNodes[2].neighbors = List.of(g2AdjListNodes[0], g2AdjListNodes[3]);
+        g2AdjListNodes[3].neighbors = List.of(g2AdjListNodes[2], g2AdjListNodes[4]);
+        g2AdjListNodes[4].neighbors = List.of(g2AdjListNodes[7], g2AdjListNodes[6], g2AdjListNodes[5]);
+        g2AdjListNodes[5].neighbors = List.of(g2AdjListNodes[4], g2AdjListNodes[6]);
+        g2AdjListNodes[6].neighbors = List.of(g2AdjListNodes[4], g2AdjListNodes[5], g2AdjListNodes[7]);
+        g2AdjListNodes[7].neighbors = List.of(g2AdjListNodes[4], g2AdjListNodes[6]);
 
-        g3Nodes[0].neighbors = List.of(g3Nodes[1]);
-        g3Nodes[1].neighbors = List.of(g3Nodes[0], g3Nodes[2], g3Nodes[3]);
-        g3Nodes[2].neighbors = List.of(g3Nodes[1], g3Nodes[4]);
-        g3Nodes[3].neighbors = List.of(g3Nodes[1], g3Nodes[4]);
-        g3Nodes[4].neighbors = List.of(g3Nodes[2], g3Nodes[3], g3Nodes[5]);
-        g3Nodes[5].neighbors = List.of(g3Nodes[4]);
+        g3AdjListNodes[0].neighbors = List.of(g3AdjListNodes[1]);
+        g3AdjListNodes[1].neighbors = List.of(g3AdjListNodes[0], g3AdjListNodes[2], g3AdjListNodes[3]);
+        g3AdjListNodes[2].neighbors = List.of(g3AdjListNodes[1], g3AdjListNodes[4]);
+        g3AdjListNodes[3].neighbors = List.of(g3AdjListNodes[1], g3AdjListNodes[4]);
+        g3AdjListNodes[4].neighbors = List.of(g3AdjListNodes[2], g3AdjListNodes[3], g3AdjListNodes[5]);
+        g3AdjListNodes[5].neighbors = List.of(g3AdjListNodes[4]);
 
-        graphs[0] = new AdjListGraph(g1Nodes);
-        graphs[1] = new AdjListGraph(g2Nodes);
-        graphs[2] = new AdjListGraph(g3Nodes);
+        graphs[0] = new AdjListGraph(g1AdjListNodes);
+        graphs[1] = new AdjListGraph(g2AdjListNodes);
+        graphs[2] = new AdjListGraph(g3AdjListNodes);
     }
 
-    public static void simpleNodesInit(Node[] gNodes) {
-        for(int i = 0; i < gNodes.length; i++) {
-            gNodes[i] = new Node(i+1);
+    public static void simpleNodesInit(AdjListNode[] gAdjListNodes) {
+        for(int i = 0; i < gAdjListNodes.length; i++) {
+            gAdjListNodes[i] = new AdjListNode(i+1);
         }
     }
 
