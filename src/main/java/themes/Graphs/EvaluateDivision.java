@@ -88,8 +88,6 @@ class Solution {
                             v[i]
                     )
             );
-            //is this required?
-            map.put(e.get(0), s);
 
             s = map.get(e.get(1));
             s.neighbors.put(
@@ -99,8 +97,6 @@ class Solution {
                             1 / v[i]
                     )
             );
-            //is this required?
-            map.put(e.get(1), s);
 
             i++;
         }

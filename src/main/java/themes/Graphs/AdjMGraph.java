@@ -122,5 +122,50 @@ public class AdjMGraph {
         return false;
     }
 
+    public int[] dijkstra(int[][] aM, int n, int start) {
+        Queue<Integer> q = new LinkedList<>();
+        var aL = new boolean[n];
+        var costs = createCosts(n, start);
+        Integer step = start;
+
+        while(step != null) {
+            var c = costs[step];
+            aL[step] = true;
+
+            for(int i = 0; i < aM[step].length; i++) {
+                if(aM[step][i] > 0) {
+                    var sC = c + aM[step][i];
+
+                    if(sC < costs[i]) {
+                        costs[i] = sC;
+
+                        if(aL[i]) {
+                            q.add(i);
+                        }
+                    }
+
+                    if(!aL[i]) {
+                        q.add(i);
+                    }
+                }
+            }
+
+            step = q.poll();
+        }
+
+        return costs;
+    }
+
+    private int[] createCosts(int n, int start) {
+        var costs = new int[n];
+
+        for(int i = 0; i < n; i++) {
+            costs[i] = Integer.MAX_VALUE;
+        }
+
+        costs[start] = 0;
+        return costs;
+    }
+
 
 }
