@@ -17,6 +17,10 @@ package main.java.themes.Graphs;
 //Input: times = [[1,2,1]], n = 2, k = 1
 //Output: 1
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.PriorityQueue;
+
 //Example 3:
 //Input: times = [[1,2,1]], n = 2, k = 2
 //Output: -1
@@ -24,21 +28,25 @@ public class NetworkDelayDijkstraWithPQ {
     //Step 1 -> convert times into adjMatrix graph
     //Step 2 -> fire Dijkstra algorithm on it
     //Step 3 -> check the output. Find the most distant node, if distance is Integer.MAX_VALUE return -1, else return distance
+    //Complexity O(V^2 + E), might optimize to O((V+E) * (log V))
     public int networkDelayTime(int[][] times, int n, int k) {
         var graph = getGraph(times, n);
         var distances = dijkstra(graph, n, k);
         return getMaxDistance(distances);
     }
 
+    //O(V^2 + E)
     public int[][] getGraph(int[][] times, int n) {
         var graph = new int[n+1][n+1];
 
+        //O(V^2)
         for(int i = 0; i < graph.length; i++) {
             for (int j = 0; j < graph[i].length; j++) {
                 graph[i][j] = -1;
             }
         }
 
+        //O(E)
         for(int i = 0; i < times.length; i++) {
             graph[times[i][0]][times[i][1]] = times[i][2];
         }
@@ -49,6 +57,7 @@ public class NetworkDelayDijkstraWithPQ {
     //Dijkstra is algorithm based on BFS
     //it uses BFS log of visited values
     //it uses it's own log of distances from start to the node
+    //BFS: O((V+E) * log V),
     public int[] dijkstra(int[][] graph, int n, int k) {
         var vis = new boolean[n+1];
         var dis = getDisArr(n, k);
@@ -82,6 +91,7 @@ public class NetworkDelayDijkstraWithPQ {
         return dis;
     }
 
+    //O(V)
     public int[] getDisArr(int n, int k) {
         var dis = new int[n+1];
 
@@ -103,6 +113,7 @@ public class NetworkDelayDijkstraWithPQ {
         });
     }
 
+    //O(V)
     public int getMaxDistance(int[] dis) {
         var max = 0;
 
@@ -120,4 +131,37 @@ public class NetworkDelayDijkstraWithPQ {
     }
 
 
+    //Complexity O(N + log E)
+    public int networkDelayTime(int[][] times, int N, int K) {
+        Map<Integer, List<int[]>> graph = new HashMap();
+        for (int[] edge: times) {
+            if (!graph.containsKey(edge[0]))
+                graph.put(edge[0], new ArrayList<int[]>());
+            graph.get(edge[0]).add(new int[]{edge[1], edge[2]});
+        }
+        PriorityQueue<int[]> heap = new PriorityQueue<int[]>(
+                (info1, info2) -> info1[0] - info2[0]);
+        heap.offer(new int[]{0, K});
+
+        Map<Integer, Integer> dist = new HashMap();
+
+        while (!heap.isEmpty()) {
+            int[] info = heap.poll();
+            int d = info[0], node = info[1];
+            if (dist.containsKey(node)) continue;
+            dist.put(node, d);
+            if (graph.containsKey(node))
+                for (int[] edge: graph.get(node)) {
+                    int nei = edge[0], d2 = edge[1];
+                    if (!dist.containsKey(nei))
+                        heap.offer(new int[]{d+d2, nei});
+                }
+        }
+
+        if (dist.size() != N) return -1;
+        int ans = 0;
+        for (int cand: dist.values())
+            ans = Math.max(ans, cand);
+        return ans;
+    }
 }
