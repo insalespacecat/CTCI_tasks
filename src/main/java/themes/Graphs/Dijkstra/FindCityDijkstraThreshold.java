@@ -1,4 +1,4 @@
-package main.java.themes.Graphs;
+package main.java.themes.Graphs.Dijkstra;
 //source; https://leetcode.com/problems/find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance/
 
 //There are n cities numbered from 0 to n-1. Given the array edges where edges[i] = [fromi, toi, weighti]

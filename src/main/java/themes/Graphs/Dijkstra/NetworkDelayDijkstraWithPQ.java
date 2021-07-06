@@ -1,4 +1,4 @@
-package main.java.themes.Graphs;
+package main.java.themes.Graphs.Dijkstra;
 
 //src: https://leetcode.com/problems/network-delay-time/
 //You are given a network of n nodes, labeled from 1 to n.
@@ -17,9 +17,7 @@ package main.java.themes.Graphs;
 //Input: times = [[1,2,1]], n = 2, k = 1
 //Output: 1
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.PriorityQueue;
+import java.util.*;
 
 //Example 3:
 //Input: times = [[1,2,1]], n = 2, k = 2
