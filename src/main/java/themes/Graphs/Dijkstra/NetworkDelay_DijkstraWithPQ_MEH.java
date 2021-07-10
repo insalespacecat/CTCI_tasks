@@ -1,6 +1,11 @@
 package main.java.themes.Graphs.Dijkstra;
 
-//src: https://leetcode.com/problems/network-delay-time/
+import java.util.*;
+
+//This class contains MEH solution which might be improved on the 2nd run of the solving
+
+//Network delay time [Solved using Dijkstra with PQ]
+//https://leetcode.com/problems/network-delay-time/
 //You are given a network of n nodes, labeled from 1 to n.
 //You are also given times, a list of travel times as directed edges times[i] = (ui, vi, wi),
 //where ui is the source node, vi is the target node,
@@ -17,12 +22,10 @@ package main.java.themes.Graphs.Dijkstra;
 //Input: times = [[1,2,1]], n = 2, k = 1
 //Output: 1
 
-import java.util.*;
-
 //Example 3:
 //Input: times = [[1,2,1]], n = 2, k = 2
 //Output: -1
-public class NetworkDelayDijkstraWithPQ {
+public class NetworkDelay_DijkstraWithPQ_MEH {
     //Step 1 -> convert times into adjMatrix graph
     //Step 2 -> fire Dijkstra algorithm on it
     //Step 3 -> check the output. Find the most distant node, if distance is Integer.MAX_VALUE return -1, else return distance

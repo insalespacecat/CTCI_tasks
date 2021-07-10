@@ -1,5 +1,16 @@
 package main.java.themes.Graphs.Dijkstra;
-//source; https://leetcode.com/problems/find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance/
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+
+//This class contains MEH solution which might be improved on the 2nd run of the solving
+
+//Find the city with the smallest number of neighbors at a threshold distance
+//[Solved using modified Dijkstra which stops calculating shortest path to neighbors if limit of weight was hit
+// -> neighbors outside limit indicate weight Double.MAX_VALUE]
+//https://leetcode.com/problems/find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance/
 
 //There are n cities numbered from 0 to n-1. Given the array edges where edges[i] = [fromi, toi, weighti]
 //represents a bidirectional and weighted edge between cities fromi and toi, and given the integer distanceThreshold.
@@ -32,12 +43,7 @@ package main.java.themes.Graphs.Dijkstra;
 //City 4 -> [City 1, City 2, City 3]
 //The city 0 has 1 neighboring city at a distanceThreshold = 2.
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
-
-public class FindCityDijkstraThreshold {
+public class FindCity_DijkstraThreshold_MEH {
     //Overview:
     //1) Caculate the number of neighbors for each city that are reachable within dT
     //2) Pick cities with least neighbors

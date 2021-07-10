@@ -2,18 +2,18 @@ package main.java.themes.Graphs;
 
 import java.util.*;
 
-//Directed weighted letter graph node.
+//Adjacency list directed weighted node
 //a ->(2) b ->(1) c
-public class DWLGNode {
+public class ALDWNode {
     public String val;
-    public Map<String, DWLGNodeConnection> neighbors;
+    public Map<String, ALDWNodeConnection> neighbors;
 
-    public DWLGNode(String val) {
+    public ALDWNode(String val) {
         this.val = val;
-        this.neighbors = new HashMap<String, DWLGNodeConnection>();
+        this.neighbors = new HashMap<String, ALDWNodeConnection>();
     }
 
-    public static double getMinCost(DWLGNode start, DWLGNode finish, HashMap<String, Double> costs) {
+    public static double getMinCost(ALDWNode start, ALDWNode finish, HashMap<String, Double> costs) {
         var shortestPaths = dijkstra(start, costs, new HashMap<String, Boolean>());
         var res = shortestPaths.get(finish.val);
         return Objects.requireNonNullElse(res, -1.0d);
@@ -33,8 +33,8 @@ public class DWLGNode {
     // - append c.toNode to queue
     // - take another step from queue
 
-    public static Map<String, Double> dijkstra(DWLGNode node, Map<String, Double> costs, Map<String, Boolean> algLog) {
-        Queue<DWLGNode> queue = new LinkedList<>();
+    public static Map<String, Double> dijkstra(ALDWNode node, Map<String, Double> costs, Map<String, Boolean> algLog) {
+        Queue<ALDWNode> queue = new LinkedList<>();
         //s = step
         var s = node;
 
@@ -43,7 +43,7 @@ public class DWLGNode {
             var sC = costs.get(s.val);
             algLog.put(s.val, true);
 
-            for(DWLGNodeConnection c : s.neighbors.values()) {
+            for(ALDWNodeConnection c : s.neighbors.values()) {
                 //cC = connection cost
                 var cC = c.weight + sC;
                 if(cC < costs.get(c.toNode.val)) {
@@ -64,11 +64,11 @@ public class DWLGNode {
     }
 
 
-    public static DWLGNode getClosestNode(DWLGNode s) {
+    public static ALDWNode getClosestNode(ALDWNode s) {
         double closest = Double.MAX_VALUE;
-        DWLGNode closestNode = null;
+        ALDWNode closestNode = null;
 
-        for(DWLGNodeConnection c : s.neighbors.values()) {
+        for(ALDWNodeConnection c : s.neighbors.values()) {
             if(c.weight < closest) {
                 closest = c.weight;
                 closestNode = c.toNode;

@@ -1,6 +1,6 @@
 package main.java.themes.Graphs.Topological_Sort;
 
-import main.java.themes.Graphs.AdjListNode;
+import main.java.themes.Graphs.ALNode;
 
 import java.util.ArrayList;
 
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 //Return true if you can finish all courses. Otherwise, return false.
 
 //So here actually sufficient to check only if there are any loops in the graph and that's it.
-public class CourseSchedule1 {
+public class CourseSchedule1_MEH {
     //1) prereq is not adjacency list. So we have to take it and construct graph as adjacency list based on it.
     //2) use topological sort on graph in order to find the order of course taking:
     // - if order is found, return true.
@@ -58,107 +58,18 @@ public class CourseSchedule1 {
             return false;
         }
 
-        //sP = starting point;
-        //var sP = findStartingPoint(graph);
-
-        for(AdjListNode n : graph) {
+        for(ALNode n : graph) {
             if(n != null && checkGraphForCycles(n, new boolean[5001], new boolean[5001])) {
                 return false;
             }
         }
 
-
-        /*
-        var tO = getTopologicalOrder(
-                sP, new boolean[5000], new StringBuilder()
-            ).toString();
-        System.out.println("Topological order: " + tO);
-        var tON = tO.split("").length;
-        System.out.println(tON);
-        System.out.println(tON+1);
-        */
-
-        //return tON+2 >= numCourses;
         return true;
     }
 
-    /*
-    //returns node starting from which you can cover most of the nodes
-    public Node[] findStartingPoint(Node[] graph) {
-        //DETECT disconnected subgraphs
-        //Running DFS forEach node
-        //collecting DFS logs
-        //if starting node's counter != graph.length -> we have discon subgphs
-        //try to match counter's algLog to others log to get counter == graph.lengh
-        //nodes of counters matched are disconnected subgraphs.
-        int[] counters = new int[graph.length+2];
-        Node[] nodes = new Node[graph.length+2];
-        boolean[][] algLogs = new boolean[graph.length+2][graph.length+2];
-
-        int counter = 0;
-
-        int bI = -1;
-        var i = 0;
-
-        while(graph[i] == null) {
-            i++;
-        }
-
-        while(i < graph.length) {
-            var res = 0;
-
-            if(graph[i] != null) {
-                algLogs[i] = new boolean[graph.length+2];
-                res = DFS(graph[i], algLogs[i], 0);
-                counters[i] = res;
-                nodes[i] = node;
-            }
-
-            if(res > counter) {
-                counter = res;
-                bI = i;
-            }
-
-            i++;
-        }
-
-        if(counters[bI] == graph.length) {
-            return (new Nodes[1][0] = nodes[bI]);
-        } else {
-            for(int i = 0; i < algLogs.length; i++) {
-                for(int j = 0; j < algLogs[i].length; j++) {
-
-                }
-            }
-        }
-
-        for()
-
-        System.out.println("Starting point is " + node.val);
-        System.out.println("With " + i + " available nodes");
-
-        return node;
-    }
-
-
-    public int DFS(Node sN, boolean[] algLog, int c) {
-        c++;
-        algLog[sN.val] = true;
-
-        for(Node n : sN.neighbors) {
-            if(!algLog[n.val]) {
-                c = DFS(n, algLog, c);
-            }
-        }
-
-        return c;
-    }
-    */
-
     //pr = prerequisites
-
-    public AdjListNode[] createGraphFromPrereq(int[][] pr) {
-        AdjListNode[] graph = new AdjListNode[5000];
+    public ALNode[] createGraphFromPrereq(int[][] pr) {
+        ALNode[] graph = new ALNode[5000];
 
         for(int i = 0; i < pr.length; i++) {
             if(pr[i][0] >= graph.length ||
@@ -168,11 +79,11 @@ public class CourseSchedule1 {
             }
 
             if(graph[pr[i][0]] == null) {
-                graph[pr[i][0]] = new AdjListNode(pr[i][0], new ArrayList<AdjListNode>());
+                graph[pr[i][0]] = new ALNode(pr[i][0], new ArrayList<ALNode>());
             }
 
             if(graph[pr[i][1]] == null) {
-                graph[pr[i][1]] = new AdjListNode(pr[i][1], new ArrayList<AdjListNode>());
+                graph[pr[i][1]] = new ALNode(pr[i][1], new ArrayList<ALNode>());
             }
 
             graph[pr[i][1]].neighbors.add(graph[pr[i][0]]);
@@ -185,13 +96,13 @@ public class CourseSchedule1 {
     //sN = starting Node;
     //cC = cycle checklist new boolean[graph.length];
     //true - cycle detected
-    public boolean checkGraphForCycles(AdjListNode sN, boolean[] cC, boolean[] algLog) {
+    public boolean checkGraphForCycles(ALNode sN, boolean[] cC, boolean[] algLog) {
         algLog[sN.val] = true;
         cC[sN.val] = true;
 
         var res = false;
 
-        for(AdjListNode n : sN.neighbors) {
+        for(ALNode n : sN.neighbors) {
             if(cC[n.val]) {
                 return true;
             }
@@ -207,20 +118,4 @@ public class CourseSchedule1 {
 
         return res;
     }
-
-
-    /*
-    public StringBuilder getTopologicalOrder(Node sN, boolean[] algLog, StringBuilder sB) {
-        algLog[sN.val] = true;
-
-        for(Node n : sN.neighbors) {
-            if(!algLog[n.val]) {
-                sB = getTopologicalOrder(n, algLog, sB);
-                sB.append(n.val); //475263
-            }
-        }
-
-        return sB;
-    }
-    */
 }

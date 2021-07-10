@@ -4,12 +4,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-public class AdjMGraph {
+public class AMGraph {
     public boolean[][] adjM;
     public List<List<Integer>> adjList;
     public int vc;
 
-    public AdjMGraph(int numberOfVertices) {
+    public AMGraph(int numberOfVertices) {
         this.adjM = new boolean[numberOfVertices][numberOfVertices];
         this.vc = numberOfVertices;
     }
@@ -28,7 +28,7 @@ public class AdjMGraph {
 
     //vN - vertex number
     //vTF - vertex to find
-    public static boolean DFS(int vN, int vTF, AdjMGraph graph, boolean[] algLog) {
+    public static boolean DFS(int vN, int vTF, AMGraph graph, boolean[] algLog) {
         if(vTF == vN) {
             return true;
         }
@@ -87,7 +87,7 @@ public class AdjMGraph {
     //So you don't need to actually "step back up" the graph
     //you can directly go into the vertex you scheduled
 
-    public static boolean BFS(int vN, int vTF, AdjMGraph graph, boolean[] algLog) {
+    public static boolean BFS(int vN, int vTF, AMGraph graph, boolean[] algLog) {
         if(vTF >= graph.adjM.length || vN >= graph.adjM.length) {
             return false;
         }
@@ -107,7 +107,7 @@ public class AdjMGraph {
         return res;
     }
 
-    private static boolean checkNbs(int vN, int vTF, AdjMGraph graph, boolean[] algLog, Queue<Integer> queue) {
+    private static boolean checkNbs(int vN, int vTF, AMGraph graph, boolean[] algLog, Queue<Integer> queue) {
         for(int i = 0; i < graph.adjM[vN].length; i++) {
             if(graph.adjM[vN][i] && !algLog[i]) {
                 algLog[i] = true;

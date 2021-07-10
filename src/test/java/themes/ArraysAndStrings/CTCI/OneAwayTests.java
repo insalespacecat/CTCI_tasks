@@ -1,4 +1,4 @@
-package test.java.themes.ArraysAndStrings.CrackingTheCodingInterview;
+package test.java.themes.ArraysAndStrings.CTCI;
 
 import main.java.themes.ArraysAndStrings.CrackingTheCodingInterview.OneAway;
 import org.junit.jupiter.api.Test;

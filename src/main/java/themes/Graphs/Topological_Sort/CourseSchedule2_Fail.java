@@ -1,10 +1,14 @@
 package main.java.themes.Graphs.Topological_Sort;
 
-import main.java.themes.Graphs.AdjListNode;
+import main.java.themes.Graphs.ALNode;
 
 import java.util.ArrayList;
 
-//Course schedule that actually requires topological sort))
+//This class contains fail solution that passes 30/44 tests and extremely inefficient.
+//For efficient solution provided by leet_code answers scroll to the last comment.
+//TO DO: solve again.
+
+//Course schedule II
 //https://leetcode.com/problems/course-schedule-ii/
 
 //There are a total of numCourses courses you have to take, labeled from 0 to numCourses - 1.
@@ -41,7 +45,7 @@ import java.util.ArrayList;
 //ai != bi
 //All the pairs [ai, bi] are distinct.
 
-public class CourseSchedule2 {
+public class CourseSchedule2_Fail {
     public int[] findOrder(int numCourses, int[][] prerequisites) {
         if(prerequisites.length == 0 && numCourses > 0) {
             var res = new int[numCourses];
@@ -83,9 +87,9 @@ public class CourseSchedule2 {
     }
 
     //returns node starting from which you can cover most of the nodes
-    public AdjListNode findStartingPoint(AdjListNode[] graph) {
+    public ALNode findStartingPoint(ALNode[] graph) {
         int counter = 0;
-        AdjListNode adjListNode = graph[0];
+        ALNode adjListNode = graph[0];
 
         var i = 0;
 
@@ -111,11 +115,11 @@ public class CourseSchedule2 {
         return adjListNode;
     }
 
-    public int DFS(AdjListNode sN, boolean[] algLog, int c) {
+    public int DFS(ALNode sN, boolean[] algLog, int c) {
         c++;
         algLog[sN.val] = true;
 
-        for(AdjListNode n : sN.neighbors) {
+        for(ALNode n : sN.neighbors) {
             if(!algLog[n.val]) {
                 c = DFS(n, algLog, c);
             }
@@ -125,8 +129,8 @@ public class CourseSchedule2 {
     }
 
     //pr = prerequisites
-    public AdjListNode[] createGraphFromPrereq(int[][] pr) {
-        AdjListNode[] graph = new AdjListNode[pr.length + 2];
+    public ALNode[] createGraphFromPrereq(int[][] pr) {
+        ALNode[] graph = new ALNode[pr.length + 2];
 
         for(int i = 0; i < pr.length; i++) {
             if(pr[i][0] >= graph.length ||
@@ -136,11 +140,11 @@ public class CourseSchedule2 {
             }
 
             if(graph[pr[i][0]] == null) {
-                graph[pr[i][0]] = new AdjListNode(pr[i][0], new ArrayList<AdjListNode>());
+                graph[pr[i][0]] = new ALNode(pr[i][0], new ArrayList<ALNode>());
             }
 
             if(graph[pr[i][1]] == null) {
-                graph[pr[i][1]] = new AdjListNode(pr[i][1], new ArrayList<AdjListNode>());
+                graph[pr[i][1]] = new ALNode(pr[i][1], new ArrayList<ALNode>());
             }
 
             graph[pr[i][1]].neighbors.add(graph[pr[i][0]]);
@@ -152,7 +156,7 @@ public class CourseSchedule2 {
     //sN = starting Node;
     //cC = cycle checklist new boolean[graph.length];
     //true - cycle detected
-    public boolean checkGraphForCycles(AdjListNode sN, boolean[] cC, boolean[] algLog) {
+    public boolean checkGraphForCycles(ALNode sN, boolean[] cC, boolean[] algLog) {
         System.out.println("Checking node " + sN.val);
         System.out.println("with neighbors " + sN.neighbors.toString());
         algLog[sN.val] = true;
@@ -160,7 +164,7 @@ public class CourseSchedule2 {
 
         var res = false;
 
-        for(AdjListNode n : sN.neighbors) {
+        for(ALNode n : sN.neighbors) {
             if(cC[n.val]) {
                 System.out.println("Cycle detected in " + n.val);
                 return true;
@@ -178,10 +182,10 @@ public class CourseSchedule2 {
         return res;
     }
 
-    public StringBuilder getTopologicalOrder(AdjListNode sN, boolean[] algLog, StringBuilder sB) {
+    public StringBuilder getTopologicalOrder(ALNode sN, boolean[] algLog, StringBuilder sB) {
         algLog[sN.val] = true;
 
-        for(AdjListNode n : sN.neighbors) {
+        for(ALNode n : sN.neighbors) {
             if(!algLog[n.val]) {
                 sB = getTopologicalOrder(n, algLog, sB);
                 sB.append(n.val); //475263
