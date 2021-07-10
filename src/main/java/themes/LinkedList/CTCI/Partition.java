@@ -1,4 +1,4 @@
-package main.java.themes.LinkedList.CrackingTheCodingInterview;
+package main.java.themes.LinkedList.CTCI;
 
 public class Partition {
     //Write code to partition linked list around a certain value

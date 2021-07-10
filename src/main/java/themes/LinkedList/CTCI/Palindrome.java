@@ -1,4 +1,4 @@
-package main.java.themes.LinkedList.CrackingTheCodingInterview;
+package main.java.themes.LinkedList.CTCI;
 
 public class Palindrome {
     //Implement a function to check if the given list is a palindrome

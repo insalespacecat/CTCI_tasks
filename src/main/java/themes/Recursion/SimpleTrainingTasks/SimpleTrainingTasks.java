@@ -1,6 +1,7 @@
-package main.java.themes.Recursion.fromAtoU;
+package main.java.themes.Recursion.SimpleTrainingTasks;
 
-public class FromAtoU {
+//This class contains simple tasks to train recursion-making skills.
+public class SimpleTrainingTasks {
 
     //Display all natural numbers from 1 to N
     //What is the end condition?

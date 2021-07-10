@@ -1,6 +1,6 @@
 package test.java.themes.ArraysAndStrings.CTCI;
 
-import main.java.themes.ArraysAndStrings.CrackingTheCodingInterview.OneAway;
+import main.java.themes.ArraysAndStrings.CTCI.OneAway;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

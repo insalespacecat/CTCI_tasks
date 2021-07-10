@@ -1,10 +1,10 @@
 package test.java.themes.Recursion;
 
-import main.java.themes.Recursion.fromAtoU.FromAtoU;
+import main.java.themes.Recursion.SimpleTrainingTasks.SimpleTrainingTasks;
 import org.junit.jupiter.api.Test;
 
-public class FromAtoUTests {
-    FromAtoU classToTest = new FromAtoU();
+public class SimpleTrainingTasksTests {
+    SimpleTrainingTasks classToTest = new SimpleTrainingTasks();
 
     @Test
     public void TestAlgorithm(){

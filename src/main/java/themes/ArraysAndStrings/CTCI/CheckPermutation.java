@@ -1,4 +1,4 @@
-package main.java.themes.ArraysAndStrings.CrackingTheCodingInterview;
+package main.java.themes.ArraysAndStrings.CTCI;
 
 public class CheckPermutation {
     //Implement an algorithm to decide if one string is a permutation of the other

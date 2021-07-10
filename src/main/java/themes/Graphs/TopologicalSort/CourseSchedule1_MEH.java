@@ -1,4 +1,4 @@
-package main.java.themes.Graphs.Topological_Sort;
+package main.java.themes.Graphs.TopologicalSort;
 
 import main.java.themes.Graphs.ALNode;
 

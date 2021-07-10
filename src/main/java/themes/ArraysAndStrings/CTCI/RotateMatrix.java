@@ -1,4 +1,4 @@
-package main.java.themes.ArraysAndStrings.CrackingTheCodingInterview;
+package main.java.themes.ArraysAndStrings.CTCI;
 
 import java.util.Arrays;
 

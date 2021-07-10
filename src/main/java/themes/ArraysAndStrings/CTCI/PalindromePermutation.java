@@ -1,4 +1,4 @@
-package main.java.themes.ArraysAndStrings.CrackingTheCodingInterview;
+package main.java.themes.ArraysAndStrings.CTCI;
 
 public class PalindromePermutation {
 

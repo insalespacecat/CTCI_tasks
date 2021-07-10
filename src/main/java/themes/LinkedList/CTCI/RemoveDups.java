@@ -1,4 +1,4 @@
-package main.java.themes.LinkedList.CrackingTheCodingInterview;
+package main.java.themes.LinkedList.CTCI;
 
 public class RemoveDups {
     //Write the code to remove duplicates from an unsorted linked list

@@ -1,4 +1,4 @@
-package main.java.themes.LinkedList.CrackingTheCodingInterview;
+package main.java.themes.LinkedList.CTCI;
 
 public class ReturnKth {
     //Implement an algorithm to find Kth to last
