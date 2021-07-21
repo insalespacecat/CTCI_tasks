@@ -23,7 +23,7 @@ import java.util.Map;
 //- get all the nodes with that lowLink out of the pathLog, and store them in SCCFound.
 
 public class TarjansAlgorithm {
-    class ALDNode {
+    public class ALDNode {
         public int val;
         public List<ALDNode> neighbors;
 

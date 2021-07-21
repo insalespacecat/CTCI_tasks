@@ -35,16 +35,20 @@ public class AMGraph {
         if(vN >= algLog.length) {
             return false;
         }
+
         algLog[vN] = true;
         boolean res = false;
+
         for(int i = 0; i < graph.adjM[vN].length; i++) {
             if(graph.adjM[vN][i] && !algLog[i]) {
                 res = DFS(i, vTF, graph, algLog);
+
                 if(res) {
                     break;
                 }
             }
         }
+
         return res;
     }
 
