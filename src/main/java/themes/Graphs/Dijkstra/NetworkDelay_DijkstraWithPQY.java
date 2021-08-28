@@ -25,7 +25,7 @@ import java.util.*;
 //Example 3:
 //Input: times = [[1,2,1]], n = 2, k = 2
 //Output: -1
-public class NetworkDelay_DijkstraWithPQ_MEH {
+public class NetworkDelay_DijkstraWithPQY {
     //Step 1 -> convert times into adjMatrix graph
     //Step 2 -> fire Dijkstra algorithm on it
     //Step 3 -> check the output. Find the most distant node, if distance is Integer.MAX_VALUE return -1, else return distance

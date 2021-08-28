@@ -37,43 +37,38 @@ package main.java.themes.Graphs.UnionFind;
 //At the beginning we have N ununited nodes, each node has itself as its parent.
 //When we unite nodes, root remain to have itself as a parent, when nodes that
 //depend on root have root as a parent.
-public class DisjointSet {
+
+class DisjointSet {
 
     class SubSet {
+        int size;
         int parent;
-        int rank;
 
-        SubSet(int parent, int rank) {
+        SubSet(int size, int parent) {
+            this.size = size;
             this.parent = parent;
-            this.rank = rank;
         }
     }
 
-    SubSet[] subsets;
+    SubSet[] ss;
 
-    //Init set with N subsets. Set parent of each node to itself,
-    //set rank to 0.
     DisjointSet(int n) {
-        subsets = new SubSet[n+1];
+        ss = new SubSet[n+1];
 
-        for(int i = 1; i <= n; i++) {
-            subsets[i] = new SubSet(i, 0);
+        for(int i = 1; i < n+1; i++) {
+            ss[i] = new SubSet(1, i);
         }
     }
 
-    //Find with path compression.
-    //It will compress path if we happen not to have already straight path to the root.
-    public int find(int node) {
-        if(subsets[node].parent != node) {
-            subsets[node].parent = find(subsets[node].parent);
+    int find(int n) {
+        if(ss[n].parent != n) {
+            ss[n].parent = find(ss[n].parent);
         }
 
-        return subsets[node].parent;
+        return ss[n].parent;
     }
 
-    //Union by rank. Accepts two elements to union. Finds their parents.
-    //Compares the ranks of their parents. parent with higher rank eats parent with lower rank;
-    public boolean union(int n1, int n2) {
+    boolean union(int n1, int n2) {
         int p1 = find(n1);
         int p2 = find(n2);
 
@@ -81,29 +76,18 @@ public class DisjointSet {
             return false;
         }
 
-        if(subsets[p1].rank > subsets[p2].rank) {
-            subsets[p2].parent = p1;
-            incrementRank(p1, p2);
+        if(ss[p1].size > ss[p2].size || ss[p1].size == ss[p2].size) {
+            ss[p2].parent = p1;
+            ss[p1].size += ss[p2].size;
         }
 
-        if(subsets[p2].rank > subsets[p1].rank) {
-            subsets[p1].parent = p2;
-            incrementRank(p2, p1);
-        }
-
-        if(subsets[p1].rank == subsets[p2].rank) {
-            subsets[p2].parent = p1;
-            incrementRank(p1, p2);
+        if(ss[p1].size < ss[p2].size) {
+            ss[p1].parent = p2;
+            ss[p2].size += ss[p1].size;
         }
 
         return true;
     }
 
-    private void incrementRank(int p1, int p2) {
-        if(subsets[p2].rank == 0) {
-            subsets[p1].rank++;
-        } else {
-            subsets[p1].rank += subsets[p2].rank;
-        }
-    }
 }
+

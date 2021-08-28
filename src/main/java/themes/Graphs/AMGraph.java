@@ -111,6 +111,8 @@ public class AMGraph {
         return res;
     }
 
+
+    //Update Jul 26 2021: why you separate it in another function lyl
     private static boolean checkNbs(int vN, int vTF, AMGraph graph, boolean[] algLog, Queue<Integer> queue) {
         for(int i = 0; i < graph.adjM[vN].length; i++) {
             if(graph.adjM[vN][i] && !algLog[i]) {

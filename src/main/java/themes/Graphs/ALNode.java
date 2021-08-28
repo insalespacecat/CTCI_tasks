@@ -25,14 +25,11 @@ public class ALNode {
 
     //The list won't work here - you can't take from list with size 0 element 2 - they are not auto-instantiated
     //But with Node s only we have no idea of which size algLog to create ?
-    public void DFS(ALNode s, List<Boolean> algLog) {
-        if(s.neighbors.size() == 0) {
-            return;
-        }
+    public void DFS(ALNode s, boolean[] algLog) {
+        algLog[s.val] = true;
 
         for(ALNode n : s.neighbors) {
-            if(!algLog.get(n.val)) {
-                algLog.set(n.val, true);
+            if(!algLog[n.val]) {
                 DFS(n, algLog);
             }
         }

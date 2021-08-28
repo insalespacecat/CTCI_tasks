@@ -9,11 +9,11 @@ Mainly thematic subfolders contain tasks that
 
 Tasks might be marked with the following tags:
 
-- FAIL: Author failed to create a solution that passes all the tests on LeetCode and had to watch explanation.
+- R: Failed to create a solution that passes all the tests on LeetCode and had to watch explanation.
 Those are usually a mess because at the end he tries any possible brute force to make it work throwing out the efficiency))
 They might contain the right solution. They are to be re-solved in the future runs.
 
-- MEH: Task is solved and solution is not terrible, but not as good as it might be. Usually those type of solutions come out 
+- Y: Task is solved and solution is not terrible, but not as good as it might be. Usually those type of solutions come out 
 when the author gets a taste of the theme and wants to feel that he can implement the algorithm/data structure
 and does not want to bother with Complexity and tries to make decent solution "feeling the complexity". Those are to be
 re-visited and solved ideally on the following re-solving sessions. 

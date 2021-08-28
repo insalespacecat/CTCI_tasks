@@ -43,7 +43,7 @@ import java.util.Queue;
 //City 4 -> [City 1, City 2, City 3]
 //The city 0 has 1 neighboring city at a distanceThreshold = 2.
 
-public class FindCity_DijkstraThreshold_MEH {
+public class FindCity_DijkstraThresholdY {
     //Overview:
     //1) Caculate the number of neighbors for each city that are reachable within dT
     //2) Pick cities with least neighbors

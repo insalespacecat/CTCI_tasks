@@ -45,7 +45,7 @@ import java.util.ArrayList;
 //ai != bi
 //All the pairs [ai, bi] are distinct.
 
-public class CourseSchedule2_Fail {
+public class CourseSchedule2Y {
     public int[] findOrder(int numCourses, int[][] prerequisites) {
         if(prerequisites.length == 0 && numCourses > 0) {
             var res = new int[numCourses];
