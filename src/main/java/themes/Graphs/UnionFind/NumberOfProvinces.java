@@ -103,11 +103,7 @@ public class NumberOfProvinces {
         var ds = new DisjointSet(isConnected.length);
 
         for(int i = 0; i < isConnected.length; i++) {
-            for(int j = 0+i; j < isConnected.length; j++) {
-                if(i == j) {
-                    continue;
-                }
-
+            for(int j = i+1; j < isConnected.length; j++) {
                 if(isConnected[i][j] == 1) {
                     ds.union(i+1, j+1);
                 }
@@ -117,3 +113,104 @@ public class NumberOfProvinces {
         return ds.findNumberOfSubsets();
     }
 }
+
+/*
+class Solution {
+
+    //Step 1: create disjoint set
+    //Step 2: Go over graph to fill DS
+    //Step 3: calc number of of subgroups.
+
+    //We are going to use union by size + path compression
+    //to achieve find operation complexity of O(1)+ (Reverse-ackermann function, max =5 for all conveviable numbers in universe)
+    class SS {
+        int s;
+        int p;
+
+        SS(int n) {
+            this.s = 1;
+            this.p = n;
+        }
+    }
+
+    //DS has two main functions: union and find.
+    //We implement disjoint set array of subSets.
+    //Each index is a node in a graph which stores class SS
+    //which tells us the parent of a node and it's size.
+    //At the beginning each subset has size 0 and parent of itself
+    //when we do union we find parents of each node passed to us
+    //and we determine which parent has bigger size and
+    //reassign parent with smaller size under parent with bigger size.
+    //adding to bigger's parent size.
+    //find with path compression recursively searches for the node
+    //that has as parent itself and as it goes up from a recursion it
+    //reassigns all the nodes' subparent to the root parent it found.
+    class DS {
+        SS[] ss;
+
+        DS(int n) {
+            this.ss = new SS[n+1];
+
+            for(int i = 1; i < n+1; i++) {
+                ss[i] = new SS(i);
+            }
+        }
+
+        public int find(int s) {
+            if(ss[s].p != s) {
+                ss[s].p = find(ss[s].p);
+            }
+
+            return ss[s].p;
+        }
+
+        public boolean union(int n1, int n2) {
+            var p1 = find(n1);
+            var p2 = find(n2);
+
+            if(p1 == p2) {
+                return false;
+            }
+
+            if(ss[p1].s >= ss[p2].s) {
+                ss[p1].s += ss[p2].s;
+                ss[p2].p = p1;
+            } else {
+                ss[p2].s += ss[p1].s;
+                ss[p1].p = p2;
+            }
+
+            return true;
+        }
+
+        public int numberOfSS() {
+            var counter = 0;
+
+            for(int i = 1; i < ss.length; i++) {
+                if(ss[i].p == i) {
+                    counter++;
+                }
+            }
+
+            return counter;
+        }
+    }
+
+    //Time O(N^2)+
+    //Space: O(N)
+    public int findCircleNum(int[][] isConnected) {
+        var icon = isConnected;
+        var ds = new DS(icon.length);
+
+        for(int i = 0; i < icon.length; i++) {
+            for(int j = i; j < icon.length; j++) {
+                if(i != j && icon[i][j] == 1) {
+                    ds.union(i+1, j+1);
+                }
+            }
+        }
+
+        return ds.numberOfSS();
+    }
+}
+ */
