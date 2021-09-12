@@ -38,7 +38,7 @@ package main.java.themes.ArraysAndStrings.LeetCode.PrefixSum;
 //    At most 104 calls will be made to sumRange.
 
 
-public class RangeSumQuery {
+public class RangeSumQuery_G {
 
     class NumArray {
         private int[] nums;
