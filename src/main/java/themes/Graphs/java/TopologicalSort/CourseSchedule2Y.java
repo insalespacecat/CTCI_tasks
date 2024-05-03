@@ -1,6 +1,6 @@
-package main.java.themes.Graphs.TopologicalSort;
+package main.java.themes.Graphs.java.TopologicalSort;
 
-import main.java.themes.Graphs.ALNode;
+import main.java.themes.Graphs.java.ALNode;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package main.java.themes.Graphs.UnionFind;
+package main.java.themes.Graphs.java.UnionFind;
 
 //Source: https://leetcode.com/problems/number-of-provinces/
 //There are n cities. Some of them are connected, while some are not. If city a is connected directly with city b,

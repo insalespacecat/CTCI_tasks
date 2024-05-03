@@ -1,6 +1,6 @@
-package main.java.themes.Graphs.CTCI;
+package main.java.themes.Graphs.java.CTCI;
 
-import main.java.themes.Graphs.ALDNode;
+import main.java.themes.Graphs.java.ALDNode;
 
 import java.util.HashMap;
 import java.util.Map;

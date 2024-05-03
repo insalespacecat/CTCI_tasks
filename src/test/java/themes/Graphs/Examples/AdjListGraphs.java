@@ -1,7 +1,7 @@
 package test.java.themes.Graphs.Examples;
 
-import main.java.themes.Graphs.ALGraph;
-import main.java.themes.Graphs.ALNode;
+import main.java.themes.Graphs.java.ALGraph;
+import main.java.themes.Graphs.java.ALNode;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package main.java.themes.Graphs.Dijkstra;
+package main.java.themes.Graphs.java.Dijkstra;
 
 public class CheapestFlightWithinKStops {
     class Solution {

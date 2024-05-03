@@ -1,4 +1,4 @@
-package main.java.themes.Graphs.UnionFind;
+package main.java.themes.Graphs.java.UnionFind;
 
 //Disjoint set is a data structure that contains sets which do not have any overlapping nodes.
 //It stores an array (or a map in case of nodes labeled with letters)

@@ -1,6 +1,6 @@
 package test.java.themes.Graphs;
 
-import main.java.themes.Graphs.ALDWNode;
+import main.java.themes.Graphs.java.ALDWNode;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import test.java.themes.Graphs.Examples.DWLGGraphs;

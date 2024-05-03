@@ -1,6 +1,6 @@
 package test.java.themes.Graphs.Examples;
 
-import main.java.themes.Graphs.AMGraph;
+import main.java.themes.Graphs.java.AMGraph;
 
 public class AdjMGraphs {
     public static AMGraph[] graphs;

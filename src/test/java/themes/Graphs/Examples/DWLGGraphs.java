@@ -1,7 +1,7 @@
 package test.java.themes.Graphs.Examples;
 
-import main.java.themes.Graphs.ALDWNode;
-import main.java.themes.Graphs.ALDWNodeConnection;
+import main.java.themes.Graphs.java.ALDWNode;
+import main.java.themes.Graphs.java.ALDWNodeConnection;
 
 import java.util.HashMap;
 

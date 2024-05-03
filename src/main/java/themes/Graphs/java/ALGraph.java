@@ -1,4 +1,4 @@
-package main.java.themes.Graphs;
+package main.java.themes.Graphs.java;
 
 import java.util.*;
 

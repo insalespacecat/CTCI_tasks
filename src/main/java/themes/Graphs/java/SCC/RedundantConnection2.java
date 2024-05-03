@@ -1,4 +1,4 @@
-package main.java.themes.Graphs.SCC;
+package main.java.themes.Graphs.java.SCC;
 
 import java.util.ArrayList;
 import java.util.HashMap;

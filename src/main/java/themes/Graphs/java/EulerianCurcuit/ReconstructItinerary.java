@@ -1,4 +1,4 @@
-package main.java.themes.Graphs.EulerianCurcuit;
+package main.java.themes.Graphs.java.EulerianCurcuit;
 
 public class ReconstructItinerary {
     /*
